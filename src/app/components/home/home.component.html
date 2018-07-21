@@ -1,0 +1,59 @@
+<!-- start if get error from data -->
+<flash-messages></flash-messages>
+
+<div class="row">
+  <div class="col-12 col-md-7 offset-md-5">
+    <form (submit)='storBy()'>
+      <div class="row">
+        <div class="col-12 col-md-9">
+          <div class="form-group">
+            <select [(ngModel)]="stro"  class="form-control input" name="stor" id="stor">
+              <option value="from new to old">from new to old</option>
+              <option value="from old to new" selected>from old to new</option>
+              <option value="price low to height">price low to height</option>
+              <option value="price height to low">price height to low</option>
+              <option value="from A to Z">from A to Z</option>
+              <option value="from Z to A">from Z to A</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <button type="submit" class="btn-sm btn">sort</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<!-- start if get error from data -->
+<!-- start view data -->
+<ng-container *ngIf="data.length > 0; else elseTemplate">
+  <div class="row justify-content-around">
+    <div class="col-6 col-md-3 col-xl-2 pt-4 " *ngFor="let product of data">
+      <div class="card position-relative">
+          <div class="sold position-absolute" *ngIf="product.qut == 0">
+            <h4 class="position-relative">sold</h4>
+          </div>
+          <div class="top2"></div>
+          <div class="down2"></div>
+          <div class="md"></div>
+          <button class="btn_view" (click)='ViewProduct(product._id)'>view</button>
+        <img  class="img-fluid" src='http://localhost:3000/images/{{product.images[0]}}'  [alt]=product.title>
+
+      </div>
+      <div class="card-body pr-0 pl-0 pb-0">
+        <h6 class="card-title p-0 text-capitalize"> title : <span class="float-right">{{product.title | titlecase}}</span></h6> 
+        <h6 class="card-title p-0 text-capitalize"> price :<span class="float-right">{{product.price | currency:'$ '}}</span></h6> 
+     </div>
+    </div>
+    <!-- start pagination-controls -->
+      <!-- end pagination-controls -->
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <h3>no items</h3>
+</ng-template>
+<!-- end view data -->
+
+

@@ -1,0 +1,48 @@
+<div class="row justify-content-between">
+  <!-- display product info -->
+  <div class="col-12">
+    <flash-messages></flash-messages>
+  </div>
+      <div class="col-12 col-sm-4 text-center pt-4" *ngFor="let product of products">
+          <div class="card position-relative">
+            <img class="img-fluid" width="100%" src='http://localhost:3000/images/{{product.images[0]}}' [alt]=product.img  id="bigImg">
+          </div>
+          <div class="row mt-1">
+            <div class="col-3 col-md-3 mt-2" *ngFor="let image of product.images">
+                <div class="card position-relative">
+                  <img  class="card-img-top" src='http://localhost:3000/images/{{image}}' [alt]=image (click)='changeImg(image)'>
+                </div>
+            </div>
+          </div>
+        </div>
+  
+    <div class="col-12  col-sm-8 pt-4" *ngFor="let product of products">
+        <div class="card-body">
+          <h4 class="card-title">{{product.title | titlecase}}</h4>
+          <h4>Description :</h4>
+          <div [innerHtml]='product.dis'></div>
+          <h6 class="p-1 pl-0 text-capitalize">sizes avelble</h6>
+          <div class="sizes pb-2">
+            <span *ngIf="product.size_41 > 1">41</span>
+            <span *ngIf="product.size_41 == 1">last pice from 41</span>
+            <span *ngIf="product.size_42 > 1">42</span>
+            <span *ngIf="product.size_42 == 1">last pice from 42</span>
+            <span *ngIf="product.size_43 > 1">43</span>
+            <span *ngIf="product.size_43 == 1">last pice from 43</span>
+          </div>
+          <div class="form-group">
+            <label for="size">plz select your size</label>
+            <select class="form-control" [(ngModel)]="size" name="size" style="width: 150px;">
+              <option value="41"     *ngIf="product.size_41 >= 1">41</option>
+              <option value="42"     *ngIf="product.size_42 >= 1">42</option>
+              <option value="43"     *ngIf="product.size_43 >= 1">43</option>
+            </select>
+          </div>
+          <h4 class="card-title">Price : {{product.price | currency: 'USD'  }}</h4>
+        </div>
+        <button (click)='goBack()' class="btn transparent">back</button>
+        <button (click)='addtoCart(product)' class="btn float-right transparent">bay now</button>
+    </div>
+  <!-- display product info -->
+  
+  </div> 

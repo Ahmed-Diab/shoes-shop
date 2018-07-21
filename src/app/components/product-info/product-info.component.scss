@@ -1,0 +1,46 @@
+@import "../../../assets/scss/color";
+@import "../../../assets/scss/imports";
+
+.card{
+    overflow: hidden;
+    border: none;
+}
+
+.sizes span{
+    padding: 5px;
+    border: solid $font_light 1px;
+    color: #000 !important;
+    font-weight: bold;
+    margin-right: 10px;
+}
+ul{
+    list-style: none;
+    li{
+        display: inline;
+        margin: 5px;
+        font-weight: bold;
+    }
+    
+}
+.btn{
+    @extend %input_btn;
+}
+
+.form-control{
+    @extend %inputSelect;
+}
+
+// globale media
+@media(max-width:778px){
+    .btn{
+        &::before{
+            width: 0 !important;
+            height: 0 !important;
+        }
+        background-color: rgba(0, 0,0,.5) !important;
+    }
+}
+
+button{
+    color: #000 !important;
+}

@@ -1,0 +1,51 @@
+<nav class="navbar  d-xl-none navbar-expand-md navbar-light bg-light ">
+  <div class="container">
+      <a class="navbar-brand"  [routerLink]="[ '/home' ]" >Ahmed Blog</a>
+
+  <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+      aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fa fa-home "></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="navbar-nav text-center ml-auto mt-2 mt-lg-0 ">
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" [routerLink]="[ '/portfolio' ]" routerLinkActive="active" >login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" [routerLink]="[ '/about' ]" routerLinkActive="active" >register</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+</nav>
+
+
+<nav class="navbar d-none d-xl-block text-center  navbar-light bg-light vh">
+  <a class="navbar-brand text-center mt-3" [routerLink]="[ '/home' ]" >Ahmed Blog</a>
+  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >الرئيسيه</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/skills' ]" routerLinkActive="active" >المهارات</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/portfolio' ]" routerLinkActive="active" >الاعمال</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/about' ]" routerLinkActive="active" >من انا</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >التواصل</a>
+        </li>
+  </ul>
+</nav>
+
+

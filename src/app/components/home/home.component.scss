@@ -1,0 +1,51 @@
+@import "../../../assets/scss/color";
+@import "../../../assets/scss/imports";
+ 
+.row{
+    .sold{
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: .5);
+        text-align: center;
+        z-index: 11;
+        h4{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    }
+    .btn{
+        @extend %input_btn;
+       padding: 8px 10px !important;
+       border: 1px solid $font_dark;
+       width: 100%;
+    }
+    .form-control{
+        color: #fff !important;
+        @extend %inputSelect;
+    }
+
+    @extend %clothesStyle;
+    .card{
+        border: none;
+        border-radius: 3px;
+    }
+    .ngx-pagination a{
+        color: $font_light !important;
+    }
+    .btn_view{
+        background-color: rgba(0, 0,0,.3) !important;
+    }
+
+}
+
+// start media
+@media(max-width:778px){
+    .top2, .md, .down2{
+        display: none;
+    }
+    .btn_view{
+        opacity: 1 !important;
+        background-color: rgba(0, 0,0,.5) !important;
+    }
+} // end media
