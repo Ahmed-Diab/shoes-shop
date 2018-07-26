@@ -10,7 +10,7 @@ var im = require('imagemagick');
 // start path to save images & rename images
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, 'public/src/')
+        callback(null, 'public/images/')
     },
     filename: function(req, file, cd){
         cd(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -41,17 +41,17 @@ const storage = multer.diskStorage({
 /////////////////////////////// end handel multer multer /////////////////////////////////
 
 // get all sharts & Tsherts
-router.get('/shoes/:id', (req, res, next)=>{
+router.get('/:id/remove', (req, res, next)=>{
     Shoes.findByIdAndRemove(req.params.id, (err, product)=>{
         if (err) {
             res.json({success:false, errMSG:err.message})
         }else{
 // to remove product images from src folder
             for (const i of product.images) {
-                fs.unlink('./public/src/'+i, (err) => {
+                fs.unlink('./public/images/'+i, (err) => {
                     if (err) throw err;
                     });
-                fs.unlink('./public/build/small_'+i, (err) => {
+                fs.unlink('./public/small-images/small_'+i, (err) => {
                     if (err) throw err;
                 });
                 } // end remove product images from src folder
@@ -76,6 +76,7 @@ router.get('/', (req, res, next)=>{
 // start post new shose
 router.post('/', (req, res, next)=>{
     upload(req, res, (err) => {
+        console.log(req.body)
         if(err)  {
             res.json({success:false, errMSG: err.message});
         } else{
@@ -83,8 +84,8 @@ router.post('/', (req, res, next)=>{
             for (const image of req.files) {
                 req_images.push(image.filename);
                 im.resize({
-                    srcPath:  process.cwd() + '/public/src/' + image.filename,
-                    dstPath:  process.cwd() + '/public/build/small_'+image.filename,
+                    srcPath:  process.cwd() + '/public/images/' + image.filename,
+                    dstPath:  process.cwd() + '/public/small-images/small_'+image.filename,
                     width:80
                   }, function(err, stdout, stderr){
                     if (err) {
@@ -95,28 +96,87 @@ router.post('/', (req, res, next)=>{
                     }
                   });
             }                 
-                var sp_category = req.body.sp_category,
-                    category = req.body.category,
+                var category   = req.body.category,
                     price      = parseInt(req.body.price),
                     title      = req.body.title,
                     dis        = req.body.dis,
                     size_41    = parseInt(req.body.size_41),
                     size_42    = parseInt(req.body.size_42),
                     size_43    = parseInt(req.body.size_43);
+                    size_44    = parseInt(req.body.size_44),
+                    size_45    = parseInt(req.body.size_45),
+                    size_46    = parseInt(req.body.size_46);
 // create new schema
                 var newShoes = new Shoes({
                     category:category,
-                    sp_category: sp_category,
-                    price:price,
-                    dis:dis,
-                    title:title,
-                    size_41:size_41,
-                    size_42:size_42,
-                    size_43:size_43,
-                    images:req_images
+                    price   :price,
+                    dis     :dis,
+                    title   :title,
+                    size_41 :size_41,
+                    size_42 :size_42,
+                    size_43 :size_43,
+                    size_44 :size_44,
+                    size_45 :size_45,
+                    size_46 :size_46,
+                    images  :req_images
                 })//end create new schema
 // save new schema to mongose
                 Shoes.create(newShoes, (err)=>{
+                    if (err) {
+                        res.json({success:false, errMSG: err.message});
+                    }else{
+                        res.json({success:true, MSG: 'saved'});
+                    }
+                })// end save new schema to mongose
+            } // end add new product to Shoes
+            })
+}) // end post new shose
+///////////////////////////////////////// start post data /////////////////////////////////////
+// start post new shose
+router.post('/:id/edit', (req, res, next)=>{     
+    upload(req, res, (err) => {
+        if(err)  {
+            res.json({success:false, errMSG: err.message});
+        } else{
+            // var req_images = [];
+            // for (const image of req.files) {
+            //     req_images.push(image.filename);
+            //     im.resize({
+            //         srcPath:  process.cwd() + '/public/images/' + image.filename,
+            //         dstPath:  process.cwd() + '/public/small-images/small_'+image.filename,
+            //         width:80
+            //       }, function(err, stdout, stderr){
+            //         if (err) {
+            //             console.log('error while resizing images' + stderr);
+            //             throw err;
+            //         }else{
+            //             console.log('resize done')
+            //         }
+            //       });
+            // }                 
+                var category = req.body.category,
+                    price      = parseInt(req.body.price),
+                    title      = req.body.title,
+                    dis        = req.body.dis,
+                    size_41    = parseInt(req.body.size_41),
+                    size_42    = parseInt(req.body.size_42),
+                    size_43    = parseInt(req.body.size_43);
+                    size_44    = parseInt(req.body.size_44),
+                    size_45    = parseInt(req.body.size_45),
+                    size_46    = parseInt(req.body.size_46);
+                Shoes.findByIdAndUpdate(req.params.id, {
+                    category:category,
+                    price   :price,
+                    dis     :dis,
+                    title   :title,
+                    size_41 :size_41,
+                    size_42 :size_42,
+                    size_43 :size_43,
+                    size_44 :size_44,
+                    size_45 :size_45,
+                    size_46 :size_46
+                    // images  :req_images
+                }, (err)=>{
                     if (err) {
                         res.json({success:false, errMSG: err.message});
                     }else{

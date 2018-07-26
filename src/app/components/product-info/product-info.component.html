@@ -10,7 +10,7 @@
           <div class="row mt-1">
             <div class="col-3 col-md-3 mt-2" *ngFor="let image of product.images">
                 <div class="card position-relative">
-                  <img  class="card-img-top" src='http://localhost:3000/images/{{image}}' [alt]=image (click)='changeImg(image)'>
+                  <img  class="card-img-top" src='http://localhost:3000/small-images/small_{{image}}' [alt]=image (click)='changeImg(image)'>
                 </div>
             </div>
           </div>
@@ -29,6 +29,12 @@
             <span *ngIf="product.size_42 == 1">last pice from 42</span>
             <span *ngIf="product.size_43 > 1">43</span>
             <span *ngIf="product.size_43 == 1">last pice from 43</span>
+            <span *ngIf="product.size_44 > 1">44</span>
+            <span *ngIf="product.size_44 == 1">last pice from 44</span>
+            <span *ngIf="product.size_45 > 1">45</span>
+            <span *ngIf="product.size_45 == 1">last pice from 45</span>
+            <span *ngIf="product.size_46 > 1">46</span>
+            <span *ngIf="product.size_46 == 1">last pice from 46</span>
           </div>
           <div class="form-group">
             <label for="size">plz select your size</label>
@@ -36,6 +42,9 @@
               <option value="41"     *ngIf="product.size_41 >= 1">41</option>
               <option value="42"     *ngIf="product.size_42 >= 1">42</option>
               <option value="43"     *ngIf="product.size_43 >= 1">43</option>
+              <option value="44"     *ngIf="product.size_44 >= 1">44</option>
+              <option value="45"     *ngIf="product.size_45 >= 1">45</option>
+              <option value="46"     *ngIf="product.size_46 >= 1">46</option>
             </select>
           </div>
           <h4 class="card-title">Price : {{product.price | currency: 'USD'  }}</h4>

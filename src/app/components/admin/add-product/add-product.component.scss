@@ -1,0 +1,25 @@
+@import "../../../../assets/scss/color";
+@import "../../../../assets/scss/imports";
+
+
+input{
+    @extend %inputFild;
+}
+select{
+    @extend %inputSelect
+}
+#images{
+    background-color: $font_dark;
+    color: $font_light;
+    opacity: 0;
+    width: 100%;
+}
+.image_span{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: block;
+    position: absolute;
+    background-color: $font_dark;
+    color: $font_light;
+}

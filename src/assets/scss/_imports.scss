@@ -13,24 +13,7 @@
  %img_border{
     border: 2px solid $font_dark;
 }
-// sidebar
-%sidbar{
 
-    .as{
-    background-color:$font_light - 90;
-    ul{
-        list-style: square;
-        a{
-            color: $font_light;
-            text-decoration: none;
-            transition: all ease-in-out .3s;
-            &:hover{
-                color: $font_dark;
-            }
-        }
-    }
-    }
-}
 /// end sid bar
 %fontStyle{
     position: absolute;
@@ -47,54 +30,8 @@
     color: $font_dark;
     padding-left: 20px;
 }
-%width_height50{
-    width: 100%;
-    height: 50%;
-}
-%width_height33{
-    width: 0%;
-    height: 33.33%;
-}
 // end extended
 
-// hover 3 ovarlay{ top2 down2 md} 
-%hover_3layars{
-    &:hover .down2{
-        width: 100%;    
-    }
-    &:hover .top2{
-        width: 100%;
-    }
-    &:hover .md{
-        width: 100%;
-    }
-    &:hover h2{
-        color: $font_light;
-     }
-}
-// 
-%ovarlay_top_down{
-    .ovarlay_top{
-        @extend %ovarlayStyle;
-        top: 0px;
-        right:0;
-        right: 0px;
-        background-color: $font_light;
-    }
-    .ovarlay_down{
-        @extend %ovarlayStyle;
-        bottom: 0px;
-        left: 0px;
-        background-color: rgba(0, 0, 0, 0.564);
-    }
-    .md{
-        top: 33.333%;
-        right: 0px;
-        background-color: rgba(0, 0, 0, 0.564);
-        @extend %ovarlayStyle;
-        @extend %width_height33;
-    }
-}
 %inputFild{
     background-color: transparent;
     color: $font_dark;
@@ -103,7 +40,6 @@
     &:focus{
         background-color: transparent !important;
     }
-    
 }
 %inputSelect{
     @extend %inputFild;
@@ -112,27 +48,9 @@
             color: $font_dark;
             border: 1px solid $font_dark;
         }
-
 }
 
 %clothesStyle{
-    .top2{
-        @extend %width_height33;
-        @extend %ovarlayStyle;
-        top: 0px;
-        left: 0px;
-        background-color: $font_light;
-    
-    }
-    .md{
-        top: 33.333%;
-        right: 0px;
-        background-color: rgba(0, 0, 0, 0.564);
-        @extend %ovarlayStyle;
-        @extend %width_height33;
-    
-        z-index: +8;
-    }
     .btn_view{
         @extend %fontStyle;
         background-color: transparent;
@@ -150,9 +68,10 @@
         cursor: pointer;
         min-width: 120px;
     }
-    .down2{
-        @extend %width_height33;
-        @extend %ovarlayStyle;        
+    .overlay{
+        @extend %ovarlayStyle;     
+        width: 0%;
+        height: 100%;   
         bottom: 0px;
         left: 0px;
         background-color: $font_light;
@@ -162,13 +81,15 @@
         border-color: $font_light;
         border-radius: 0;
         overflow: hidden;
-        @extend %hover_3layars;
+        &:hover .overlay{
+            width: 100%;
+        }
         &:hover .btn_view{
             opacity: 1;
             top: 50%;
         }
-    
     }
+
 }
 %a_link{
     color: $font_light;
@@ -182,23 +103,23 @@
         background-color: transparent;
         border: 2px solid $font_dark;
         color: $font_light;
-
     }
     input::placeholder{
         color: $font_light;
-         
     }
 }
 %input_btn{
     background-color: transparent;
     border: $font_light solid 1px;
-    color: #fff;
+    color: #000;
     border-radius: 0px;
     padding: 5px 10px !important;
     font-weight: bold;
     text-transform: capitalize;
     position: relative;
+    cursor: pointer;
     &:hover {
+
         &::before{
             width: 100%;
             height: 100%;

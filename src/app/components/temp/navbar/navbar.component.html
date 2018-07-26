@@ -15,10 +15,19 @@
         <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-capitalize" [routerLink]="[ '/portfolio' ]" routerLinkActive="active" >login</a>
+        <a class="nav-link text-capitalize" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-capitalize" [routerLink]="[ '/about' ]" routerLinkActive="active" >register</a>
+        <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" [routerLink]="[ '/profile' ]" routerLinkActive="active" >profile</a>
+      </li>
+      <li class="nav-item" *ngIf="qut">
+        <a class="nav-link font-weight-bold" [routerLink]="['/cart']" routerLinkActive="active"> 
+          <i class="fa fa-shopping-basket"></i>
+          <span>{{qut}}</span>
+        </a>
       </li>
     </ul>
   </div>
@@ -30,21 +39,27 @@
 <nav class="navbar d-none d-xl-block text-center  navbar-light bg-light vh">
   <a class="navbar-brand text-center mt-3" [routerLink]="[ '/home' ]" >Ahmed Blog</a>
   <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >الرئيسيه</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="[ '/skills' ]" routerLinkActive="active" >المهارات</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="[ '/portfolio' ]" routerLinkActive="active" >الاعمال</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="[ '/about' ]" routerLinkActive="active" >من انا</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >التواصل</a>
-        </li>
+    <li class="nav-item">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/profile' ]" routerLinkActive="active" >profile</a>
+    </li>
+    <li class="nav-item" *ngIf="qut">
+      <a class="nav-link font-weight-bold" [routerLink]="['/cart']" routerLinkActive="active"> 
+        <i class="fa fa-shopping-basket"></i>
+        <span>{{qut}}</span>
+      </a>
+    </li>
   </ul>
 </nav>
 

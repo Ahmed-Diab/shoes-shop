@@ -1,0 +1,50 @@
+<div *ngIf="data[0]">
+  <table class="table">
+    <thead>
+      <tr class="text-capitalize">
+        <th class="item_image">item image</th>
+        <th>size</th>
+        <th>qut</th>
+        <th>price</th>
+        <th>total price</th>
+        <th>remove item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of data">
+        <td scope="row" > 
+          <img src="http://localhost:3000/images/{{product.img}}" [alt]=product.img  class="img-fluid"  style="width: 45px; height: 45px;" >
+        </td>
+        <td scope="row">{{product.size}}</td>
+        <td scope="row">
+          <!-- <input type="number" value="{{product.qut}}" min="1" max="{{product.itemQut}}" id=""> -->
+         <span class="pt-2" style="width: 40%; float: left;">{{product.qut}}</span>
+          <span style="width: 60%; float: right;">
+            <i class="fa fa-chevron-circle-up" (click)=plusQut(product)></i>
+            <br>
+            <i class="fa fa-chevron-circle-down" (click)=minusQut(product.id)></i>
+          </span> 
+        </td>
+        <td scope="row">{{product.price  | currency: 'USD' }}</td>
+        <td scope="row">{{product.price *  product.qut| currency: 'USD' }}</td>
+        <td scope="row"><button (click)='removeItemById(product.id)' class="btn ">remove</button></td>
+      </tr>
+    </tbody>
+    <tbody>
+        <tr class="text-capitalize">
+          <td scope="row" class="item_image"></td>
+          <td scope="row"></td>
+          <td scope="row">Total Qut : {{totalQut}}</td>
+          <td scope="row"></td>
+          <td scope="row">Total Price : {{total | currency: 'USD' }}</td>
+          <td scope="row">  <button class="btn  text-capitalize" (click)='checkOut()'>checkout</button>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+<div *ngIf="!data[0]">
+  <h2 class="h1 text-capitalize">no items in shoping car</h2>
+</div>
+
+

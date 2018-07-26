@@ -33,6 +33,18 @@ var newProudauct = mongoose.Schema({
         type:Number,
         required:true
     },
+    size_44:{
+        type:Number,
+        required:true
+    },
+    size_45:{
+        type:Number,
+        required:true
+    },
+    size_46:{
+        type:Number,
+        required:true
+    },
     updated_date: { type: Date, default: Date.now }
 
 });

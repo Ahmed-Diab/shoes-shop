@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {trigger,  state, style,  animate, transition, query, group } from '@angular/animations';
-
+import { ServicesService } from './services/services.service';
+// import { scrollPosition } from "./scrollable.directive";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,127 +10,154 @@ import {trigger,  state, style,  animate, transition, query, group } from '@angu
     trigger('routeAnimation', [
       transition('home => *', [
         style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('skills => portfolio', [
-        style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('skills => about', [
-        style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('skills => contact', [
-        style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('portfolio => about', [
-        style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('portfolio => contact', [
-        style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('about => contact', [
-        style({height:'!'}),
-        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
-        group([
-          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
-          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
-        ])
-      ]),
-      transition('contact => *', [
-        style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'10px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
-      transition('about => portfolio', [
+      transition('* => home', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('* => cart', [
         style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
-      transition('about => skills', [
+      transition('cart => *', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('product_info => *', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('login => contact', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('contact => login', [
         style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
-      transition('about => home', [
+      transition('register => contact', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('contact => register', [
         style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
-      transition('portfolio => skills', [
+      transition('contact => profile', [
         style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
-      transition('portfolio => home', [
+      transition('register => login', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('register => profile', [
         style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
-      transition('skills => home', [
+      transition('login => register', [
         style({height:'!'}),
         query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
-        query(':enter, :leave', style({position:'absolute', top:0, left:0, right:0}),{ optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
         group([
           query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('login => profile', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(-100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('profile => login', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('profile => register', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
+          query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
+        ])
+      ]),
+      transition('profile => contact', [
+        style({height:'!'}),
+        query(':enter', style({transform:'translateX(100%'}), { optional: true }),
+        query(':enter, :leave', style({position:'absolute', top:'15px', left:0, right:0}),{ optional: true }),
+        group([
+          query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(-100%)'}))]),
           query(':enter', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(0)'}))])
         ])
       ]),
@@ -142,8 +170,11 @@ export class AppComponent {
   spinner:Boolean = false;
 
   
-  constructor() { 
+  constructor(
+    private _services:ServicesService
+  ) { 
     // window load function
+
     window.addEventListener('load', function() {
       var sp = document.getElementById('sp');
       document.body.style.overflow = 'hidden';
@@ -155,7 +186,7 @@ export class AppComponent {
   }
   ngOnInit() {
     window.scrollTo(0, 0);
-    
+
   }
 
   getDepth(outlet){

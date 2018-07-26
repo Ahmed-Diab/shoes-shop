@@ -1,18 +1,18 @@
 <app-scroll-top></app-scroll-top>
 <app-spinner id="sp" blo=true ></app-spinner>
-<div class="row">
+<div class="row" >
     <div class="col-12 col-xl-3 pl-0 pr-0">
         <app-navbar></app-navbar>
     </div>
-    <div class="col-12 col-xl-9 cont">
+    <div class="col-12 col-xl-9 cont" scrollable (scrollPosition)='scrollHandelar($event)'>
         <div id="page" class="routerContaner p-3" [@routeAnimation]="getDepth(myOutlet)">
             <router-outlet #myOutlet='outlet'></router-outlet>
         </div>
     </div>
+    <div class="col-3 d-none d-xl-block"></div>
     <div class="col-12 col-xl-9 pl-0 pr-0">
         <app-footer></app-footer>
     </div>
-    <div class="col-3 d-none d-xl-block"></div>
 
 </div>
 

@@ -1,0 +1,20 @@
+@import "../../../../assets/scss/color";
+
+.btn{
+
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: $font_dark;
+    color: #fff;
+    &:focus, &:active{
+        box-shadow: none;
+    }
+
+}
+.active{
+    color: #fff !important;
+    background-color: $font_light !important;
+    color: $font_dark !important;
+
+}

@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     window.scrollTo(0,0);
+    let u = JSON.parse(localStorage.getItem('carts')) || [];
+    this._services.changeData(u.length);
     // get data from url
     this.subscription = this._services.getShoes().subscribe((res:any)=>{
       if (res.success) {
@@ -48,8 +50,7 @@ export class HomeComponent implements OnInit {
   ViewProduct(_id){
     this._route.navigate(['/product_info/',{id:_id}])
   }
- 
-
+  
   storBy(){
     if (this.stro === 'from old to new') {
       let k = this._services.storFromlow(this.data, 'updated_date');

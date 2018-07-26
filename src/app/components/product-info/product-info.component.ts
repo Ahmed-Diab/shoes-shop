@@ -4,6 +4,7 @@ import { HttpParams } from '@angular/common/http';
 import { ServicesService } from '../../services/services.service';
 import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
 import { product } from '../../modules/product';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { product } from '../../modules/product';
   templateUrl: './product-info.component.html',
   styleUrls: ['./product-info.component.scss']
 })
-export class ProductInfoComponent implements OnInit {
+export class ProductInfoComponent implements OnInit, OnDestroy {
   id:any;
   data:any;
   products:any;
@@ -24,7 +25,8 @@ export class ProductInfoComponent implements OnInit {
   options:any = [];
   pathName:string;
   allSizes: any = [];
-  maxQut:number
+  maxQut:number;
+  subscription:Subscription
 
   constructor(
     private activteRoute:ActivatedRoute,
@@ -39,7 +41,7 @@ export class ProductInfoComponent implements OnInit {
     this._services.changeData(u.length);
     window.scrollTo(0, 0);
 // start if pathname = men
-  this._services.getShoes().subscribe((res:any)=>{
+    this.subscription = this._services.getShoes().subscribe((res:any)=>{
     if (res.success) {
       this.data = res.data;
       this.activteRoute.paramMap.subscribe((params:ParamMap)=>{
@@ -53,6 +55,11 @@ export class ProductInfoComponent implements OnInit {
     }
   });
   } // end ngOnInit
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
 getByid(ar, _id) {
     var obj = ar.filter(function(node) {
         return node._id == _id;
@@ -68,7 +75,7 @@ changeImg(image){
 
 // go back function
 goBack(){
-  return this.router.navigate([`${this.backUrl}/${this.key}`]);
+  return this.router.navigate([`/home`]);
 }
 // addtosession(pro){
 //  let id = pro._id;

@@ -1,0 +1,94 @@
+@import "../../../../assets/scss/color";
+@import "../../../../assets/scss/imports";
+
+.row{
+    .btn{
+        background-color: $font_dark;
+        color: #fff;
+        &:active, &:focus{
+            background-color: $font_light;
+        }
+    }
+    .fa-remove{
+        color: red;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        opacity: .6;
+        cursor: pointer;
+        &:hover{
+            opacity: 1;
+        }
+    .fa-edit{
+        color: red;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        opacity: .6;
+        cursor: pointer;
+        &:hover{
+            opacity: 1;
+        }
+    }
+    }
+    .card{
+        border: none;
+        border-radius: 3px;
+    }
+}
+.displayNone{
+    transition: all ease .2s;
+    animation: hide ease .2s forwards;
+}
+@keyframes hide{
+    0%{
+        opacity: 1;
+        display: block;
+        width: 100%;
+
+    }
+    100%{
+        opacity: 0;
+        display: none !important;
+        width: 0;
+    }
+}
+.overlay{
+    overflow: auto;
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(#ccc, $alpha: .8);
+    left: 0;
+    top: 0;
+    z-index: +10000;
+    padding:20px;
+    
+}
+input{
+    @extend %inputFild;
+    color: #000;
+}
+select{
+    @extend %inputSelect
+}
+#images{
+    background-color: $font_dark;
+    color: $font_light;
+    opacity: 0;
+    width: 100%;
+}
+.image_span{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: block;
+    position: absolute;
+    background-color: $font_dark;
+    color: $font_light;
+}
+
+.display{
+    display: block;
+}

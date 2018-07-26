@@ -25,9 +25,6 @@
   </div>
 
 </div>
-
-<!-- start if get error from data -->
-<!-- start view data -->
 <ng-container *ngIf="data.length > 0; else elseTemplate">
   <div class="row justify-content-around">
     <div class="col-6 col-md-3 col-xl-2 pt-4 " *ngFor="let product of data">
@@ -35,12 +32,9 @@
           <div class="sold position-absolute" *ngIf="product.qut == 0">
             <h4 class="position-relative">sold</h4>
           </div>
-          <div class="top2"></div>
-          <div class="down2"></div>
-          <div class="md"></div>
+          <div class="overlay"></div>
           <button class="btn_view" (click)='ViewProduct(product._id)'>view</button>
         <img  class="img-fluid" src='http://localhost:3000/images/{{product.images[0]}}'  [alt]=product.title>
-
       </div>
       <div class="card-body pr-0 pl-0 pb-0">
         <h6 class="card-title p-0 text-capitalize"> title : <span class="float-right">{{product.title | titlecase}}</span></h6> 
@@ -51,6 +45,10 @@
       <!-- end pagination-controls -->
   </div>
 </ng-container>
+
+<!-- start if get error from data -->
+<!-- start view data -->
+
 <ng-template #elseTemplate>
   <h3>no items</h3>
 </ng-template>
