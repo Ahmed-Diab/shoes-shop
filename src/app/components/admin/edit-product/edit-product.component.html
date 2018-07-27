@@ -14,7 +14,7 @@
   <div class="row justify-content-around">
     <div class="col-sm-3 mt-4" *ngFor="let product of data">
       <div class="card position-relative">
-        <img  class="img-fluid" title="{{product.title}}" src='http://localhost:3000/images/{{product.images[0]}}'  [alt]=product.title>
+        <img  class="img-fluid" title="{{product.title}}" src='/images/{{product.images[0]}}'  [alt]=product.title>
         <i class="fa fa-remove position-absolute" title="remove product" (click)='remove($event, product)'></i>
         <i class="fa fa-edit position-absolute" title="edit product" (click)='editProduct($event, product)'></i>
       </div>
@@ -38,7 +38,7 @@
                 <div class="row">
                         <div class="col-3 col-md-3 mt-2" *ngFor="let image of images">
                                 <div class="card position-relative">
-                                  <img  class="card-img-top" src='http://localhost:3000/images/{{image}}' [alt]=image (click)='changeImg(image)'>
+                                  <img  class="card-img-top" src='/images/{{image}}' [alt]=image (click)='changeImg(image)'>
                                 </div>
                             </div>
                         <!-- <div class="col-12">

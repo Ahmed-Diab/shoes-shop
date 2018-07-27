@@ -1,19 +1,46 @@
-<div class="login-box">
-  <div class="lb-header">
-    <a href="#" class="active" id="login-box-link">signup</a>
-  </div>
-<form class="email-signup">
-  <div class="u-form-group">
-    <input type="email" placeholder="Email"/>
-  </div>
-  <div class="u-form-group">
-    <input type="password" placeholder="Password"/>
-  </div>
-  <div class="u-form-group">
-    <input type="password" placeholder="Confirm Password"/>
-  </div>
-  <div class="u-form-group">
-    <button>Sign Up</button>
-  </div>
-</form>
+<div class="row">
+  <div class="col-md-3"></div>
+  <!-- start masseges -->
+<div class="col-md-6">
+    <flash-messages></flash-messages>
+  <div>
+        <!-- end masseges-->
+
+        <!-- start registre page -->
+    <h2 class="page-header">Register</h2>
+      <div class="text-center">
+        <span class="imagestyle">
+            <img  id="uplode_image" [src]="imagesURL" alt="imagesURL">	
+        </span>
+      </div>
+    <form (submit)="onRegisterSubmit()" >
+        <div class="form-group position-relative text-center">
+        
+            <span class="image_span position-absolute" >select image</span>
+<!-- uplode use method -->
+        <input id="user_image" name="user_image" type="file" (change)='onChange($event.target.files)' /> 
+    </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Enter Username">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder=" Enter Password">
+      </div>
+      <div class="form-group">
+        <label for="repassword">Re Password</label>
+        <input type="password" [(ngModel)]="repassword" name="repassword" class="form-control" id="repassword" placeholder=" Re Password">
+      </div>
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+    </div>
 </div>
+<!-- end registre page -->
+
+</div>
+

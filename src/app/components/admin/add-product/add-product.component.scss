@@ -9,7 +9,7 @@ select{
     @extend %inputSelect
 }
 #images{
-    background-color: $font_dark;
+    background-color: $color_4;
     color: $font_light;
     opacity: 0;
     width: 100%;
@@ -20,6 +20,6 @@ select{
     z-index: -1;
     display: block;
     position: absolute;
-    background-color: $font_dark;
+    background-color: $color_4;
     color: $font_light;
 }

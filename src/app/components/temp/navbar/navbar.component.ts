@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../../../services/services.service';
 // import { AuthService } from '../../../services/auth.service';
 import { Router } from '../../../../../node_modules/@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   showen : any;
   constructor(
     private _services:ServicesService,
-    // private _auth:AuthService,
+    private _auth:AuthService,
     private _router:Router,
   ) { }
 
@@ -31,12 +32,12 @@ export class NavbarComponent implements OnInit {
     this._services.changeData(this.qut.length);
   }
 
-  // onLogoutClick() {
-  //   this._services.changeSuc(false);
-  //   this._auth.logout();
-  //   this._router.navigate(['/users/login']);
-  //   return false;
-  // }
+  onLogoutClick() {
+    this._services.changeSuc(false);
+    this._auth.logout();
+    this._router.navigate(['/login']);
+    return false;
+  }
 }
 
 

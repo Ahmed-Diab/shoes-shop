@@ -86,7 +86,7 @@ if (fileCount > 0) { // a file was selected
   formData.append('size_45',     this.size_45);
   formData.append('size_46',     this.size_46);
 }
-  this._http.post(`${this._services.url}`, formData).subscribe((res:any) => {
+  this._http.post(`/product`, formData).subscribe((res:any) => {
     if (res.success) {
       window.scrollTo(0, 0);
       this._flash_messages.show(res.MSG, {cssClass:'alert-success', timeout:3000})

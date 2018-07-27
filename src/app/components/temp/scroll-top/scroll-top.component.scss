@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/color";
+@import "../../../../assets/scss/imports";
 span{
     text-align: center;
     position: fixed;
@@ -6,6 +8,7 @@ span{
     z-index: 2000;
     padding: 0px;
     margin: 0px;
+    color: $color_3;
     i{
         position: relative;
         top: 50%;

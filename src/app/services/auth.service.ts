@@ -9,7 +9,7 @@ export class AuthService {
   authToken:any;
   user:any;
   isDev:Boolean;
-  _url:string ='http://localhost:3000';
+  _url:string ='';
   tu:Boolean = false;
   constructor(
     private http:HttpClient,
@@ -18,11 +18,11 @@ export class AuthService {
   ) {
     this.isDev = true;  // Change to false before deployment
   }
-  bayDone(data, id) {
-    return this.http.post<any>( `${this._url}/users/user/${id}`, data).pipe(
-      catchError(this._service.handleError)
-    )
-  }
+  // bayDone(data, id) {
+  //   return this.http.post<any>( `${this._url}/users/${id}`, data).pipe(
+  //     catchError(this._service.handleError)
+  //   )
+  // }
   
   registerUser(user) {
     return this.http.post<any>( `${this._url}/users/register`, user).pipe(

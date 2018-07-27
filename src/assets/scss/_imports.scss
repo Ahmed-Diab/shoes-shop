@@ -11,7 +11,7 @@
     height: 0%;
 }
  %img_border{
-    border: 2px solid $font_dark;
+    border: 2px solid $color_4;
 }
 
 /// end sid bar
@@ -35,7 +35,7 @@
 %inputFild{
     background-color: transparent;
     color: $font_dark;
-    border: 1px solid $font_dark;
+    border: 1px solid $color_4;
     border-radius: 0 !important;
     &:focus{
         background-color: transparent !important;
@@ -43,10 +43,10 @@
 }
 %inputSelect{
     @extend %inputFild;
+
         option{
-            background-color: black !important;
+            background-color: $color_1 !important;
             color: $font_dark;
-            border: 1px solid $font_dark;
         }
 }
 
@@ -56,7 +56,7 @@
         background-color: transparent;
         border: 2px solid $font_light;
         padding: 5px 10px;
-        color: #fff;
+        color: $font_light;
         font-weight: bold;
         position: absolute;
         opacity: 0;
@@ -74,11 +74,11 @@
         height: 100%;   
         bottom: 0px;
         left: 0px;
-        background-color: $font_light;
+        background-color: $color_1;
     }
     .card{
         background-color: transparent;
-        border-color: $font_light;
+        border-color: $color_1;
         border-radius: 0;
         overflow: hidden;
         &:hover .overlay{
@@ -101,7 +101,7 @@
 %input_style{
     input{
         background-color: transparent;
-        border: 2px solid $font_dark;
+        border: 2px solid $color_4;
         color: $font_light;
     }
     input::placeholder{
@@ -110,7 +110,7 @@
 }
 %input_btn{
     background-color: transparent;
-    border: $font_light solid 1px;
+    border: $color_1 solid 1px;
     color: #000;
     border-radius: 0px;
     padding: 5px 10px !important;
@@ -127,7 +127,7 @@
     }
     &::before{
         content: '';
-        background-color: rgba($font_light, $alpha: .5);
+        background-color: rgba($color_1, $alpha: .5);
         width: 0%;
         height: 0%;
         top: 0;

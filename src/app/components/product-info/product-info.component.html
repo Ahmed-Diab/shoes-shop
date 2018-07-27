@@ -5,12 +5,12 @@
   </div>
       <div class="col-12 col-sm-4 text-center pt-4" *ngFor="let product of products">
           <div class="card position-relative">
-            <img class="img-fluid" width="100%" src='http://localhost:3000/images/{{product.images[0]}}' [alt]=product.img  id="bigImg">
+            <img class="img-fluid" width="100%" src='/images/{{product.images[0]}}' [alt]=product.img  id="bigImg">
           </div>
           <div class="row mt-1">
             <div class="col-3 col-md-3 mt-2" *ngFor="let image of product.images">
                 <div class="card position-relative">
-                  <img  class="card-img-top" src='http://localhost:3000/small-images/small_{{image}}' [alt]=image (click)='changeImg(image)'>
+                  <img  class="card-img-top" src='/small-images/small_{{image}}' [alt]=image (click)='changeImg(image)'>
                 </div>
             </div>
           </div>

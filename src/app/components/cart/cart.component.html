@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let product of data">
         <td scope="row" > 
-          <img src="http://localhost:3000/images/{{product.img}}" [alt]=product.img  class="img-fluid"  style="width: 45px; height: 45px;" >
+          <img src="/images/{{product.img}}" [alt]=product.img  class="img-fluid"  style="width: 45px; height: 45px;" >
         </td>
         <td scope="row">{{product.size}}</td>
         <td scope="row">
@@ -37,7 +37,9 @@
           <td scope="row">Total Qut : {{totalQut}}</td>
           <td scope="row"></td>
           <td scope="row">Total Price : {{total | currency: 'USD' }}</td>
-          <td scope="row">  <button class="btn  text-capitalize" (click)='checkOut()'>checkout</button>
+          <td scope="row">
+            <button class="btn  text-capitalize" (click)="openCheckout(total)">checkout</button>
+          <!-- <button  (click)='checkOut()'>checkout</button> -->
         </tr>
       </tbody>
   </table>

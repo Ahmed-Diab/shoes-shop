@@ -1,6 +1,6 @@
 <nav class="navbar  d-xl-none navbar-expand-md navbar-light bg-light ">
   <div class="container">
-      <a class="navbar-brand"  [routerLink]="[ '/home' ]" >Ahmed Blog</a>
+      <a class="navbar-brand"  [routerLink]="[ '/home' ]" >Shoes Shop</a>
 
   <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -14,14 +14,17 @@
       <li class="nav-item">
         <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!_auth.loggedIn()">
         <a class="nav-link text-capitalize" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!_auth.loggedIn()">
         <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link text-capitalize" [routerLink]="[ '/profile' ]" routerLinkActive="active" >profile</a>
+      <li class="nav-item" *ngIf="_auth.loggedIn()">
+          <a class="nav-link font-weight-bold" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
+      </li>
+      <li *ngIf="_auth.loggedIn()">
+          <a class="nav-link font-weight-bold" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
       </li>
       <li class="nav-item" *ngIf="qut">
         <a class="nav-link font-weight-bold" [routerLink]="['/cart']" routerLinkActive="active"> 
@@ -36,30 +39,33 @@
 </nav>
 
 
-<nav class="navbar d-none d-xl-block text-center  navbar-light bg-light vh">
-  <a class="navbar-brand text-center mt-3" [routerLink]="[ '/home' ]" >Ahmed Blog</a>
+<nav class="navbar d-none d-xl-block text-center   vh">
+  <a class="navbar-brand text-center mt-3" [routerLink]="[ '/home' ]" >Shoes Shop</a>
   <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" [routerLink]="[ '/profile' ]" routerLinkActive="active" >profile</a>
-    </li>
-    <li class="nav-item" *ngIf="qut">
-      <a class="nav-link font-weight-bold" [routerLink]="['/cart']" routerLinkActive="active"> 
-        <i class="fa fa-shopping-basket"></i>
-        <span>{{qut}}</span>
-      </a>
-    </li>
+      <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
+        </li>
+        <li class="nav-item" *ngIf="!_auth.loggedIn()">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
+        </li>
+        <li class="nav-item" *ngIf="!_auth.loggedIn()">
+          <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
+        </li>
+        <li class="nav-item" *ngIf="_auth.loggedIn()">
+            <a class="nav-link font-weight-bold" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
+        </li>
+        <li *ngIf="_auth.loggedIn()">
+            <a class="nav-link font-weight-bold" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
+        </li>
+        <li class="nav-item" *ngIf="qut">
+          <a class="nav-link font-weight-bold" [routerLink]="['/cart']" routerLinkActive="active"> 
+            <i class="fa fa-shopping-basket"></i>
+            <span>{{qut}}</span>
+          </a>
+        </li>
   </ul>
 </nav>
 

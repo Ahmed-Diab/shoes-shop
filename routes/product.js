@@ -76,7 +76,6 @@ router.get('/', (req, res, next)=>{
 // start post new shose
 router.post('/', (req, res, next)=>{
     upload(req, res, (err) => {
-        console.log(req.body)
         if(err)  {
             res.json({success:false, errMSG: err.message});
         } else{

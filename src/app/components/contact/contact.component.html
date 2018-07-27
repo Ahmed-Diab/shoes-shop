@@ -1,3 +1,64 @@
-<p>
-  contact works!
-</p>
+
+        <h2 class="pt-2 pb-2 text-capitalize text-left">contact :</h2>
+        <div class="wrapper animated bounceInLeft m-3  p-2">
+          <div class="contact-info d-none d-md-block">
+            <ul class="contact-ul">
+              <li ><i class="fa fa-phone"></i> (555) 555-5555</li>
+              <li ><i class="fa fa-envelope"></i> ahmedeiddiab@gmail.com</li>
+            </ul>
+            <div class="medea-info text-center" >
+                    <h3> follow us </h3>
+                    <a href="http://">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="http://">
+                      <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="http://">
+                      <i class="fa fa-github"></i>
+                    </a>
+                    <a href="http://">
+                      <i  class="fa fa-google-plus"></i>
+                    </a>
+              </div>
+          </div>
+          <div class="contact">
+            <h3>Email Us</h3>
+            <form (submit)='sendMessage()'>
+              <p>
+                <input [(ngModel)]="name" type="text" name="name" placeholder="Name">
+              </p>
+              <p>
+                <input [(ngModel)]="email" type="email" name="email" placeholder="Email">
+              </p>
+              <p class="full">
+                <label>Message</label>
+                <textarea [(ngModel)]="message" name="message" rows="5" placeholder="Message" ></textarea>
+              </p>
+              <p class="full">
+                <button type="submit" class="btn btn-danger">Send</button>
+              </p>
+            </form>
+          </div>
+          <div class="contact-info d-block d-md-none">
+              <ul class="contact-ul">
+                <li><i class="fa fa-phone"></i> (555) 555-5555</li>
+                <li><i class="fa fa-envelope"></i> test@acme.test</li>
+              </ul>
+              <div class="text-center medea-info" >
+                <h3 class="text-left">folow us</h3>
+                <a href="http://">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a href="http://">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                <a href="http://">
+                  <i class="fa fa-github"></i>
+                </a>
+                <a href="http://">
+                  <i  class="fa fa-google-plus"></i>
+                </a>
+                </div>
+            </div>
+        </div>

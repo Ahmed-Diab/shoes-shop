@@ -4,13 +4,13 @@
 .row{
     .btn{
         background-color: $font_dark;
-        color: #fff;
+        color: $color_2;
         &:active, &:focus{
             background-color: $font_light;
         }
     }
     .fa-remove{
-        color: red;
+        color: $color_3;
         position: absolute;
         right: 5px;
         top: 5px;
@@ -20,7 +20,7 @@
             opacity: 1;
         }
     .fa-edit{
-        color: red;
+        color: $color_3;
         position: absolute;
         left: 5px;
         top: 5px;
@@ -59,7 +59,7 @@
     display: none;
     width: 100%;
     height: 100%;
-    background-color: rgba(#ccc, $alpha: .8);
+    background-color: rgba($color_3, $alpha: .8);
     left: 0;
     top: 0;
     z-index: +10000;
@@ -68,13 +68,13 @@
 }
 input{
     @extend %inputFild;
-    color: #000;
+    color: $color_4;
 }
 select{
     @extend %inputSelect
 }
 #images{
-    background-color: $font_dark;
+    background-color: $color_4;
     color: $font_light;
     opacity: 0;
     width: 100%;
@@ -85,7 +85,7 @@ select{
     z-index: -1;
     display: block;
     position: absolute;
-    background-color: $font_dark;
+    background-color: $color_4;
     color: $font_light;
 }
 

@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/color';
 .row{
     margin: 0;
 }
+.alert-danger{
+    font-size: 18px !important;
+    color: $font_dark;
+    background-color: $color_3;
+}
+.alert-success{
+    font-size: 18px !important;
+    color: $font_light;
+    background-color: $color_2;
+}
+

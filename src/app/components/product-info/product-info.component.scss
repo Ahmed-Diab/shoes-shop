@@ -6,10 +6,13 @@
     border: none;
 }
 
+select{
+    border: 1px solid $color_1 !important;
+}
 .sizes span{
     padding: 5px;
-    border: solid $font_light 1px;
-    color: #000 !important;
+    border: solid $color_1 1px;
+    color: $color_4 !important;
     font-weight: bold;
     margin-right: 10px;
 }
@@ -37,10 +40,10 @@ ul{
             width: 0 !important;
             height: 0 !important;
         }
-        background-color: rgba(0, 0,0,.5) !important;
+        background-color: rgba($color_4,.5) !important;
     }
 }
 
 button{
-    color: #000 !important;
+    color: $color_4 !important;
 }

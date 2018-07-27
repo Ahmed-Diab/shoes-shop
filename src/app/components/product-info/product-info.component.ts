@@ -69,7 +69,7 @@ getByid(ar, _id) {
 // to see image in pig frame
 changeImg(image){
   var bigImg = document.getElementById('bigImg');
-  bigImg.setAttribute('src', 'http://localhost:3000/images/'+image);
+  bigImg.setAttribute('src', '/images/'+image);
   window.scrollTo(bigImg.offsetTop,0)
 }
 

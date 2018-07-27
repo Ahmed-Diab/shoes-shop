@@ -1,8 +1,10 @@
+@import "../../../../assets/scss/color";
+@import "../../../../assets/scss/imports";
 footer{
     padding: 20px 0;
     .fa{
         font-size: 20px;
         margin-left: 10px;
-        color: gray;
+        color: $font_light;
     }
 }

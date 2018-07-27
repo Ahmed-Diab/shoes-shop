@@ -1,6 +1,5 @@
 <!-- start if get error from data -->
 <flash-messages></flash-messages>
-
 <div class="row">
   <div class="col-12 col-md-7 offset-md-5">
     <form (submit)='storBy()'>
@@ -27,14 +26,14 @@
 </div>
 <ng-container *ngIf="data.length > 0; else elseTemplate">
   <div class="row justify-content-around">
-    <div class="col-6 col-md-3 col-xl-2 pt-4 " *ngFor="let product of data">
+    <div class="col-6 col-md-3 col-xl-2 pt-4 " *ngFor="let product of data | paginate: { itemsPerPage: 24, currentPage: p }">
       <div class="card position-relative">
           <div class="sold position-absolute" *ngIf="product.qut == 0">
             <h4 class="position-relative">sold</h4>
           </div>
           <div class="overlay"></div>
           <button class="btn_view" (click)='ViewProduct(product._id)'>view</button>
-        <img  class="img-fluid" src='http://localhost:3000/images/{{product.images[0]}}'  [alt]=product.title>
+        <img  class="img-fluid" src='/images/{{product.images[0]}}'  [alt]=product.title>
       </div>
       <div class="card-body pr-0 pl-0 pb-0">
         <h6 class="card-title p-0 text-capitalize"> title : <span class="float-right">{{product.title | titlecase}}</span></h6> 
@@ -45,7 +44,7 @@
       <!-- end pagination-controls -->
   </div>
 </ng-container>
-
+<pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
 <!-- start if get error from data -->
 <!-- start view data -->
 

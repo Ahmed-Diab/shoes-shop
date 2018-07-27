@@ -23,7 +23,14 @@ export class ScrollTopComponent implements OnInit {
   }
 
   scrollTop(){
-    window.scrollTo(0, 0);
+    var windooff = window.scrollY;
+    for (let i = 0; i > windooff; i--) {
+      const element = i;
+      console.log(element)
+      window.scrollTo(0, element );
+    }
+    // window.scrollTo(0, 0);
+    console.log(windooff)
   }
 
 }

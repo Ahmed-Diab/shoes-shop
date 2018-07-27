@@ -1,11 +1,11 @@
 @import "../../../assets/scss/color";
 @import "../../../assets/scss/imports";
 input{
-    color: #000 !important;
+    color: $color_4 !important;
 }
 .table{
     td th{
-        border-color: $font_light;
+        border-color: $color_1;
 
     }
     .btn{

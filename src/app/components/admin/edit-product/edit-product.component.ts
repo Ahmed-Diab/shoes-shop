@@ -66,7 +66,7 @@ ngOnDestroy(): void {
 // remove product
 remove(event, product){
   let id = product._id;
-      return this._http.get(`${this._services.url}/${id}/remove`).subscribe((res:any)=>{
+      return this._http.get(`/product/${id}/remove`).subscribe((res:any)=>{
         if(res.success){
           setTimeout(function(){event.target.parentElement.parentElement.remove()}, 500);
           event.target.parentElement.parentElement.classList.add('displayNone');
@@ -145,7 +145,7 @@ formData.append('size_44',     this.size_44);
 formData.append('size_45',     this.size_45);
 formData.append('size_46',     this.size_46);
 // }
-this._http.post(`${this._services.url}/${this.id}/edit`, formData).subscribe((res:any) => {
+this._http.post(`/product/${this.id}/edit`, formData).subscribe((res:any) => {
   if (res.success) {
     var overlay = document.querySelector('.overlay');
     overlay.classList.remove('display');

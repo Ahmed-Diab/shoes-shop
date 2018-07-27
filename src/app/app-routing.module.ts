@@ -10,6 +10,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
 import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
+import { ProfileComponent } from './components/users/profile/profile.component';
+import { UsersComponent } from './components/admin/users/users.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'home', pathMatch:'full'},
@@ -19,11 +21,12 @@ const routes: Routes = [
   {path:'login', component:LoginComponent, data:{depth:'login'}},
   {path:'register', component:RegisterComponent, data:{depth:'register'}},
   {path:'contact', component:ContactComponent, data:{depth:'contact'}},
-  {path:'profile', component:ContactComponent, data:{depth:'profile'}},
+  {path:'profile', component:ProfileComponent, data:{depth:'profile'}},
   {path:'admin', component:AdminHomeComponent, children:[
     {path:'', redirectTo:'add', pathMatch:'full'},
     {path:'add', component:AddProductComponent},
-    {path:'edit', component:EditProductComponent}
+    {path:'edit', component:EditProductComponent},
+    {path:'users', component:UsersComponent}
   ]},
 
 

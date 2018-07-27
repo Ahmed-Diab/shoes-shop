@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {trigger,  state, style,  animate, transition, query, group } from '@angular/animations';
 import { ServicesService } from './services/services.service';
-// import { scrollPosition } from "./scrollable.directive";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

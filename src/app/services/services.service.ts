@@ -8,7 +8,7 @@ import { throwError, BehaviorSubject } from '../../../node_modules/rxjs';
 export class ServicesService {
 
 
-  url='http://localhost:3000/product'
+  url=''
   // to make share data in all componant
   private dataSrc = new BehaviorSubject<number>(0);
   private suc = new BehaviorSubject<boolean>(false);
@@ -27,7 +27,10 @@ export class ServicesService {
     }
 
   getShoes(){
-    return this.http.get(this.url);
+    return this.http.get(`/product`);
+  }
+  getUsers(){
+    return this.http.get(`/users`);
   }
 
   handleError(error: HttpErrorResponse) {

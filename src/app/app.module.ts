@@ -20,11 +20,12 @@ import { AddProductComponent } from './components/admin/add-product/add-product.
 import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { MessegesComponent } from './components/admin/messeges/messeges.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { ValidateService } from './services/validate.service';
 import { NgxEditorModule } from 'ngx-editor';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -42,7 +43,6 @@ import { NgxEditorModule } from 'ngx-editor';
     EditProductComponent,
     UsersComponent,
     MessegesComponent,
-    CheckoutComponent,
     routingComponant,
     ContactComponent,
     AdminHomeComponent,
@@ -56,9 +56,10 @@ import { NgxEditorModule } from 'ngx-editor';
     BrowserAnimationsModule, 
     FlashMessagesModule,
     NgxEditorModule,
+    NgxPaginationModule
     
   ],
-  providers: [ServicesService, FlashMessagesService, ValidateService],
+  providers: [ServicesService, FlashMessagesService, ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

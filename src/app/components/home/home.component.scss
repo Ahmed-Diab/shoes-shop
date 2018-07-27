@@ -1,11 +1,14 @@
 @import "../../../assets/scss/color";
 @import "../../../assets/scss/imports";
 
+select, button{
+    border: 1px solid $color_1 !important;
+}
 .row{
     .sold{
         width: 100%;
         height: 100%;
-        background-color: rgba($color: #000000, $alpha: .5);
+        background-color: rgba($color_4, $alpha: .5);
         text-align: center;
         z-index: 11;
         h4{
@@ -13,15 +16,16 @@
             transform: translateY(-50%);
         }
 
+
     }
     .btn{
         @extend %input_btn;
        padding: 8px 10px !important;
-       border: 1px solid $font_dark;
+       border: 1px solid $color_4;
        width: 100%;
     }
     .form-control{
-        color: #fff !important;
+        color: $color_2 !important;
         @extend %inputSelect;
     }
 
@@ -34,11 +38,25 @@
         color: $font_light !important;
     }
     .btn_view{
-        background-color: rgba(0, 0,0,.3) !important;
+        background-color: rgba($color_4,.3) !important;
     }
 
-}
 
+
+}
+.my-pagination /deep/ .ngx-pagination {
+
+    text-align: center;
+    padding: 20px 0;
+    .current, a{
+        font-weight: bold;
+    }
+    .current{
+        font-weight: 900;
+        background-color: $color_4;
+        color: $color_1;
+    }
+  }
 // start media
 @media(max-width:778px){
     .top2, .md, .down2{
@@ -46,6 +64,6 @@
     }
     .btn_view{
         opacity: 1 !important;
-        background-color: rgba(0, 0,0,.5) !important;
+        background-color: rgba($color_4,.5) !important;
     }
 } // end media

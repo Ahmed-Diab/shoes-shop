@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 import { ServicesService } from '../../services/services.service';
 import { Router } from '../../../../node_modules/@angular/router';
 
@@ -15,9 +15,11 @@ export class CartComponent implements OnInit {
   total:any;
   totalQut:any;
   quntty:number;
+  globalListener: any;
 constructor(
   private service:ServicesService,
-  private _route:Router
+  private _route:Router,
+  private renderer: Renderer
 ) { }
 // private productAddedSource = new Subject<any>()
 ngOnInit() {
@@ -138,8 +140,27 @@ if(changeData.qut < 1){
 localStorage.setItem('carts', JSON.stringify(products));
 localStorage.setItem('totalPrice', JSON.stringify(this.total));
 }// end change quntty to minus
-checkOut(){
-this._route.navigate(['/checkout'])
+
+openCheckout(t) {
+  var handler = (<any>window).StripeCheckout.configure({
+    key: 'pk_test_oi0sKPJYLGjdvOXOM8tE8cMa',
+    locale: 'auto',
+    token: function (token: any) {
+      // You can access the token ID with `token.id`.
+      // Get the token ID to your server-side code for use.
+    }
+  });
+  let o = t * 100
+
+  handler.open({
+    name: 'Demo Site',
+    description: '2 widgets',
+    amount: o
+  });
+
+  this.globalListener = this.renderer.listenGlobal('window', 'popstate', () => {
+    handler.close();
+  });
 }
 
 }
