@@ -111,7 +111,7 @@
 %input_btn{
     background-color: transparent;
     border: $color_1 solid 1px;
-    color: #000;
+    color: $color_4;
     border-radius: 0px;
     padding: 5px 10px !important;
     font-weight: bold;
@@ -127,7 +127,7 @@
     }
     &::before{
         content: '';
-        background-color: rgba($color_1, $alpha: .5);
+        background-color: rgba($color_3, .5);
         width: 0%;
         height: 0%;
         top: 0;

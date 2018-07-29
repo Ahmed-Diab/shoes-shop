@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { ServicesService } from '../../services/services.service';
 import { Router } from '../../../../node_modules/@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +20,9 @@ export class CartComponent implements OnInit {
 constructor(
   private service:ServicesService,
   private _route:Router,
-  private renderer: Renderer
+  private renderer: Renderer,
+  private _auth:AuthService,
+  private _router:Router
 ) { }
 // private productAddedSource = new Subject<any>()
 ngOnInit() {
@@ -142,6 +145,9 @@ localStorage.setItem('totalPrice', JSON.stringify(this.total));
 }// end change quntty to minus
 
 openCheckout(t) {
+if (!this._auth.loggedIn()) {
+  this._router.navigate(['/login']);
+}else{
   var handler = (<any>window).StripeCheckout.configure({
     key: 'pk_test_oi0sKPJYLGjdvOXOM8tE8cMa',
     locale: 'auto',
@@ -153,14 +159,16 @@ openCheckout(t) {
   let o = t * 100
 
   handler.open({
-    name: 'Demo Site',
-    description: '2 widgets',
+    name: 'shoes shop',
+    description: 'shoes shop',
     amount: o
   });
 
   this.globalListener = this.renderer.listenGlobal('window', 'popstate', () => {
     handler.close();
   });
+}
+
 }
 
 }

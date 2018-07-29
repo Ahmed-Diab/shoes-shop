@@ -14,7 +14,7 @@ export class ValidateService {
   }
 
   validateAddProduact(product){
-    if(product.dis == undefined || product.title == undefined || product.imagesURL == undefined ||  product.category == undefined || product.sp_category == undefined || product.price == undefined) {
+    if(product.dis == undefined || product.title == undefined || product.imagesURL == undefined ||  product.category == undefined ||  product.price == undefined) {
       return false;
   } else {
     return true;

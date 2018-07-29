@@ -47,9 +47,17 @@
             }
             input, textarea{
                 background-color: transparent;
-                color:$color_3 !important;
+                color:$color_4 !important;
                 &::placeholder{
-                    color:$color_3
+                    color:$color_3;
+                    transition: all ease .3s;
+                }
+                &:focus{
+                    outline: none !important;
+                    box-shadow: 0 0 0;
+                    &::placeholder{
+                      transform: scale(.8)
+                  }
                 }
             }
             button {

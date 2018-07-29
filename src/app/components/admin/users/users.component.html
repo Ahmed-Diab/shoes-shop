@@ -1,3 +1,33 @@
-<p>
-  users works!
-</p>
+<app-spinner *ngIf="spinner"></app-spinner>
+  <!-- start flash messages -->
+  <flash-messages></flash-messages>
+  <!-- end flash messages -->
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="users[0]">
+      <table class="table">
+        <thead>
+          <tr class="text-capitalize">
+            <th>num</th>
+            <th class="item_image">users image</th>
+            <th>name</th>
+            <th>email</th>
+            <th>edit</th>
+            <th>remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i = index">
+            <td scope="row">{{ i+1 }}</td>
+            <td scope="row" > 
+              <img src="/users_images/{{user.image}}" [alt]=user.img  class="img-fluid"  style="width: 45px; height: 45px;" >
+            </td>
+            <td scope="row">{{user.username}}</td>
+            <td scope="row">{{user.email}}</td>
+            <td scope="row"><button (click)='editUser(user.id)' class="btn ">edit</button></td>
+            <td scope="row"><button (click)='removeUser(user.id)' class="btn ">remove</button></td>
+          </tr>
+        </tbody>
+        </table>
+  </div>
+</div>

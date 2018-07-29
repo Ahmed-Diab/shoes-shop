@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 import { throwError, BehaviorSubject } from '../../../node_modules/rxjs';
-
+import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
 
 
-  url=''
+  // url='';
+  url:string = 'http://localhost:3000';
+
   // to make share data in all componant
   private dataSrc = new BehaviorSubject<number>(0);
   private suc = new BehaviorSubject<boolean>(false);
@@ -27,10 +29,11 @@ export class ServicesService {
     }
 
   getShoes(){
-    return this.http.get(`/product`);
+    return this.http.get(`${this.url}/product`).pipe( catchError(this.handleError));
+  
   }
   getUsers(){
-    return this.http.get(`/users`);
+    return this.http.get(`${this.url}/users`).pipe( catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {
@@ -52,6 +55,7 @@ export class ServicesService {
           return (a[p] < b[p]) ? 1 : (a[p] < b[p]) ? -1 : 0;
         });
     }
+    
   storFromlow(arr, p){
     return  arr.slice(0).sort((a, b)=> {
           return (a[p] > b[p]) ? 1 : (a[p] > b[p]) ? -1 : 0;

@@ -63,7 +63,7 @@ router.get('/', (req, res, next)=>{
   User.find({}, (err, users)=>{
     if(err){
 
-      res.json({success:false, err:err.message})
+      res.json({success:false, errMSG:err.message})
 
     }else{
       try {
@@ -73,8 +73,7 @@ router.get('/', (req, res, next)=>{
       }
     }
   })
-})
-
+});
 
 router.post('/login', (req, res, next) => {
     const username = req.body.username;

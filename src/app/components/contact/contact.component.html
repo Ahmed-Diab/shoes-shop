@@ -26,10 +26,10 @@
             <h3>Email Us</h3>
             <form (submit)='sendMessage()'>
               <p>
-                <input [(ngModel)]="name" type="text" name="name" placeholder="Name">
+                <input [(ngModel)]="name" autocomplete="off" type="text" name="name" placeholder="Name">
               </p>
               <p>
-                <input [(ngModel)]="email" type="email" name="email" placeholder="Email">
+                <input  [(ngModel)]="email" type="email" name="email" placeholder="Email" autocomplete="off">
               </p>
               <p class="full">
                 <label>Message</label>

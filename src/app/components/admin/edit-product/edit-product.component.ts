@@ -64,12 +64,12 @@ ngOnDestroy(): void {
   this.subscription.unsubscribe();
 }
 // remove product
-remove(event, product){
+remove(e, product){
   let id = product._id;
       return this._http.get(`/product/${id}/remove`).subscribe((res:any)=>{
         if(res.success){
-          setTimeout(function(){event.target.parentElement.parentElement.remove()}, 500);
-          event.target.parentElement.parentElement.classList.add('displayNone');
+          setTimeout(function(){e.target.parentElement.remove()}, 500);
+          e.target.parentElement.classList.add('displayNone');
         }
       })
 }// en remove

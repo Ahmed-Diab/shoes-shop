@@ -55,13 +55,13 @@
           <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
         </li>
         <li class="nav-item" *ngIf="_auth.loggedIn()">
-            <a class="nav-link font-weight-bold" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
+            <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
         </li>
         <li *ngIf="_auth.loggedIn()">
-            <a class="nav-link font-weight-bold" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
+            <a class="nav-link" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
         </li>
         <li class="nav-item" *ngIf="qut">
-          <a class="nav-link font-weight-bold" [routerLink]="['/cart']" routerLinkActive="active"> 
+          <a class="nav-link" [routerLink]="['/cart']" routerLinkActive="active"> 
             <i class="fa fa-shopping-basket"></i>
             <span>{{qut}}</span>
           </a>

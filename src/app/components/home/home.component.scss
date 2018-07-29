@@ -25,7 +25,7 @@ select, button{
        width: 100%;
     }
     .form-control{
-        color: $color_2 !important;
+        color: $color_4 !important;
         @extend %inputSelect;
     }
 
@@ -38,7 +38,8 @@ select, button{
         color: $font_light !important;
     }
     .btn_view{
-        background-color: rgba($color_4,.3) !important;
+        background-color: rgba($color_2, .3) !important;
+        color: $color_4;
     }
 
 

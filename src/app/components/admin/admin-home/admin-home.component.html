@@ -1,23 +1,23 @@
 <div class="row">
   <!-- start linkes for admin -->
-    <div class="col-md-4 col-12 justify-content-center">
+    <div class="col-12 justify-content-center pb-3">
       <div class="row">
-        <div class="col-md-12 ">
+        <div class="col-md-3 ">
           <a class="btn text-capitalize font-weight-bold" 
           [routerLink]="['/admin/add']"
             routerLinkActive="active">add new product <i class="fa fa-upload"></i></a>
         </div>
-        <div class="col-12">
+        <div class="col-3">
           <a class="btn text-capitalize font-weight-bold"
            [routerLink]="['/admin/edit']" 
            routerLinkActive="active">edit products <i class="fa fa-remove"></i></a>
         </div>
-        <div class="col-12">
+        <div class="col-3">
             <a class="btn text-capitalize font-weight-bold" 
             [routerLink]="['/admin/users']"
              routerLinkActive="active">users <i class="fa fa-plus"></i></a>
           </div>
-          <div class="col-12">
+          <div class="col-3">
             <a class="btn text-capitalize font-weight-bold" 
             [routerLink]="['/admin/messages']" 
             routerLinkActive="active">messages <i class="fa fa-envelope"></i></a>
@@ -26,7 +26,7 @@
     </div>
   <!-- end linkes for admin -->
   <!-- start router outlet -->
-    <div class="col-md-8">
+    <div class="col-12">
       <router-outlet></router-outlet>
     </div>
   <!-- end router outlet -->

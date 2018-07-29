@@ -15,9 +15,9 @@
     <div class="col-sm-3 mt-4" *ngFor="let product of data">
       <div class="card position-relative">
         <img  class="img-fluid" title="{{product.title}}" src='/images/{{product.images[0]}}'  [alt]=product.title>
-        <i class="fa fa-remove position-absolute" title="remove product" (click)='remove($event, product)'></i>
-        <i class="fa fa-edit position-absolute" title="edit product" (click)='editProduct($event, product)'></i>
       </div>
+      <i class="fa fa-remove position-absolute" title="remove product" (click)='remove($event, product)'></i>
+      <i class="fa fa-edit position-absolute" title="edit product" (click)='editProduct($event, product)'></i>
     </div>
   </div>
 </ng-container>
@@ -27,10 +27,10 @@
   <h3>no items</h3>
 </ng-template>
       </div> 
+
 <div class="overlay">
   <div id="sample">
     <div class="row">
-
     <!-- start  form -->
         <div class="col-12">
                 <flash-messages></flash-messages>

@@ -14,17 +14,17 @@ export class HomeComponent implements OnInit {
   data:any = [];
   spinner = true;
   stro:string = 'select sort by';
-  subscription:Subscription
+  subscription:Subscription;
+  url:string;
 
   constructor(
     private _route:Router,
     private _services:ServicesService,
     private _flash_messages:FlashMessagesService
     
-  ) { 
-
-  }
+  ) {  }
   ngOnInit() {
+    this.url = this._services.url;
     window.scrollTo(0,0);
     let u = JSON.parse(localStorage.getItem('carts')) || [];
     this._services.changeData(u.length);
@@ -32,15 +32,17 @@ export class HomeComponent implements OnInit {
     this.subscription = this._services.getShoes().subscribe((res:any)=>{
       if (res.success) {
         this.data = res.data;
-        this.spinner = false;  
+        this.spinner = false;
       }
       if(!res.success){
         this._flash_messages.show(res.errMSG , { cssClass: 'alert-danger', timeout: 20000 });
+        this.spinner = false;
       }
     },
     // if error 
     (error:any) =>{
       this._flash_messages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 });
+      this.spinner = false;
     });
   }
   ngOnDestroy(){
@@ -48,7 +50,7 @@ export class HomeComponent implements OnInit {
   }
   // to see product info
   ViewProduct(_id){
-    this._route.navigate(['/product_info/',{id:_id}])
+    this._route.navigate(['/product_info/', {id:_id}])
   }
   
   storBy(){

@@ -44,23 +44,25 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/admin']);
             this._auth.storeUserData(data.token, data.user);
           }else{
-            this._services.changeSuc(true);
-            this._auth.storeUserData(data.token, data.user);
-            this._router.navigate(['/profile']);
+            let items = [] = JSON.parse(localStorage.getItem('carts')) || [];
+            if (items.length >= 1) {
+              this._auth.storeUserData(data.token, data.user);
+              this._router.navigate(['/cart']);
+            }else{
+              this._auth.storeUserData(data.token, data.user);
+              this._router.navigate(['/profile']);
+            }
           }
-
-          
         } else {
           window.scrollTo(0, 0);
           this.flashMessage.show(data.errMSG, {cssClass: 'alert-danger', timeout: 5000});
           this._router.navigate(['/login']);
         }
     },
-    (err)=>{
-      this.flashMessage.show(err, {cssClass: 'alert-danger', timeout: 10000});
-    });
-}
+      (err)=>{
+        this.flashMessage.show(err, {cssClass: 'alert-danger', timeout: 10000});
+      });
+      }
     }
-
 }
  

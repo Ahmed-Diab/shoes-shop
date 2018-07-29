@@ -1,7 +1,8 @@
 <!-- start if get error from data -->
+<app-spinner *ngIf="spinner"></app-spinner>
 <flash-messages></flash-messages>
 <div class="row">
-  <div class="col-12 col-md-7 offset-md-5">
+  <div *ngIf="data.length > 0;" class="col-12 col-md-7 offset-md-5">
     <form (submit)='storBy()'>
       <div class="row">
         <div class="col-12 col-md-9">
@@ -33,7 +34,7 @@
           </div>
           <div class="overlay"></div>
           <button class="btn_view" (click)='ViewProduct(product._id)'>view</button>
-        <img  class="img-fluid" src='/images/{{product.images[0]}}'  [alt]=product.title>
+        <img  class="img-fluid" src='{{url}}/images/{{product.images[0]}}'  [alt]=product.title>
       </div>
       <div class="card-body pr-0 pl-0 pb-0">
         <h6 class="card-title p-0 text-capitalize"> title : <span class="float-right">{{product.title | titlecase}}</span></h6> 
@@ -44,10 +45,12 @@
       <!-- end pagination-controls -->
   </div>
 </ng-container>
-<pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
-<!-- start if get error from data -->
-<!-- start view data -->
 
+<div *ngIf="data.length > 24;">
+    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- start if no data -->
 <ng-template #elseTemplate>
   <h3>no items</h3>
 </ng-template>

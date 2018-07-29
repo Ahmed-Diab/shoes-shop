@@ -1,0 +1,24 @@
+@import "../../../../assets/scss/color";
+@import "../../../../assets/scss/imports";
+input{
+    color: $color_4 !important;
+}
+.table{
+    td th{
+        border-color: $color_1;
+
+    }
+    .btn{
+        @extend %input_btn;
+    }
+}
+@media(max-width:578px){
+    .item_image{
+        display: none;
+    }
+    .btn{
+        &::before{
+            background-color:transparent !important;
+        }
+    }
+}

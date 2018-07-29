@@ -12,6 +12,9 @@ import { AddProductComponent } from './components/admin/add-product/add-product.
 import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { UsersComponent } from './components/admin/users/users.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AdminGuard } from './guard/admin.guard';
+import { MessegesComponent } from './components/admin/messeges/messeges.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'home', pathMatch:'full'},
@@ -21,15 +24,17 @@ const routes: Routes = [
   {path:'login', component:LoginComponent, data:{depth:'login'}},
   {path:'register', component:RegisterComponent, data:{depth:'register'}},
   {path:'contact', component:ContactComponent, data:{depth:'contact'}},
-  {path:'profile', component:ProfileComponent, data:{depth:'profile'}},
-  {path:'admin', component:AdminHomeComponent, children:[
+  {path:'profile', component:ProfileComponent, data:{depth:'profile'}, canActivate:[AuthGuard]},
+  {path:'admin/login', component:LoginComponent, data:{depth:'login'}},
+
+  {path:'admin', component:AdminHomeComponent, canActivate:[AdminGuard], children:[
     {path:'', redirectTo:'add', pathMatch:'full'},
     {path:'add', component:AddProductComponent},
     {path:'edit', component:EditProductComponent},
     {path:'users', component:UsersComponent}
   ]},
 
-
+  
   {path:'**', component:ErrorComponent, data:{depth:'error'}}
 ];
 
@@ -43,6 +48,16 @@ export const routingComponant = [
   HomeComponent,
   CartComponent,
   ErrorComponent,
-  ProductInfoComponent
+  ProductInfoComponent,
+  AdminHomeComponent,
+  ContactComponent,
+  ErrorComponent,
+  LoginComponent,
+  ProfileComponent,
+  RegisterComponent,
+  AddProductComponent,
+  EditProductComponent,
+  UsersComponent,
+  MessegesComponent,
 
 ]

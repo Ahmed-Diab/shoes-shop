@@ -9,12 +9,15 @@
 select{
     border: 1px solid $color_1 !important;
 }
-.sizes span{
-    padding: 5px;
-    border: solid $color_1 1px;
-    color: $color_4 !important;
-    font-weight: bold;
-    margin-right: 10px;
+.sizes {
+    .av-sizes{
+        display: inline-block;
+        padding: 5px;
+        border: solid $color_1 1px;
+        color: $color_4 !important;
+        font-weight: bold;
+        margin: 10px 10px 0 0; 
+    }
 }
 ul{
     list-style: none;
@@ -40,7 +43,6 @@ ul{
             width: 0 !important;
             height: 0 !important;
         }
-        background-color: rgba($color_4,.5) !important;
     }
 }
 

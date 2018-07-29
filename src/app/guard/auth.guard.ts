@@ -13,8 +13,9 @@ canActivate() {
   if(this._authService.loggedIn()) {
     return true;
   } else {
-    this._router.navigate(['/users/login']);
+    this._router.navigate(['/login']);
     return false;
   }
+  
 }
 } 

@@ -9,27 +9,29 @@
             background-color: $font_light;
         }
     }
-    .fa-remove{
-        color: $color_3;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        opacity: .6;
-        cursor: pointer;
-        &:hover{
-            opacity: 1;
-        }
     .fa-edit{
-        color: $color_3;
-        position: absolute;
-        left: 5px;
-        top: 5px;
+        position: relative;
+        bottom: -20px;
+        font-size: 20px;
         opacity: .6;
         cursor: pointer;
+        color: $color_1;
+        left: 15px !important;
         &:hover{
             opacity: 1;
         }
     }
+    .fa-remove{
+        color: $color_3;
+        position: relative;
+        right: 15px;
+        bottom: -20px;
+        font-size: 20px;
+        opacity: .6;
+        cursor: pointer;
+        &:hover{
+            opacity: 1;
+        }
     }
     .card{
         border: none;
@@ -40,6 +42,7 @@
     transition: all ease .2s;
     animation: hide ease .2s forwards;
 }
+
 @keyframes hide{
     0%{
         opacity: 1;
