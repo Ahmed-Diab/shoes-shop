@@ -1,4 +1,4 @@
-<div *ngIf="data[0]">
+<div *ngIf="data.total > 0">
   <table class="table">
     <thead>
       <tr class="text-capitalize">
@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of data">
+      <tr *ngFor="let product of data.items">
         <td scope="row" > 
           <img src="/images/{{product.img}}" [alt]=product.img  class="img-fluid"  style="width: 45px; height: 45px;" >
         </td>
@@ -20,7 +20,7 @@
           <!-- <input type="number" value="{{product.qut}}" min="1" max="{{product.itemQut}}" id=""> -->
          <span class="pt-2" style="width: 40%; float: left;">{{product.qut}}</span>
           <span style="width: 60%; float: right;">
-            <i class="fa fa-chevron-circle-up" (click)=plusQut(product)></i>
+            <i class="fa fa-chevron-circle-up" (click)="plusQut(product.id, product.size)" ></i>
             <br>
             <i class="fa fa-chevron-circle-down" (click)=minusQut(product.id)></i>
           </span> 
@@ -34,18 +34,18 @@
         <tr class="text-capitalize">
           <td scope="row" class="item_image"></td>
           <td scope="row"></td>
-          <td scope="row">Total Qut : {{totalQut}}</td>
+          <td scope="row">Total Qut : {{data.totalQut}}</td>
           <td scope="row"></td>
-          <td scope="row">Total Price : {{total | currency: 'USD' }}</td>
+          <td scope="row">Total Price : {{data.total | currency: 'USD' }}</td>
           <td scope="row">
-            <button class="btn  text-capitalize" (click)="openCheckout(total)">checkout</button>
+            <button class="btn  text-capitalize" (click)="openCheckout(data.total)">checkout</button>
           <!-- <button  (click)='checkOut()'>checkout</button> -->
         </tr>
       </tbody>
   </table>
 </div>
 
-<div *ngIf="!data[0]">
+<div *ngIf="!data.total > 0">
   <h2 class="h1 text-capitalize">no items in shoping car</h2>
 </div>
 

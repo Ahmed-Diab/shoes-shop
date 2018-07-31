@@ -1,4 +1,7 @@
 const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
 const path = require('path');
 const cors = require('cors');
 const config = require('./config/database');
@@ -23,10 +26,18 @@ mongoose.connection.on('error', (err) => {
 });
 const product = require('./routes/product');
 const users = require('./routes/users');
+const cart = require('./routes/cart');
+
+app.use(cookieParser())
+app.use(session({ 
+  secret: 'keyboard cat', cookie: { maxAge: 600000000 }
+}))
+
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public/')));
 app.use(express.static(path.join(__dirname, 'dist/')));
+
 
 app.use(cors());
 // Passport Middleware
@@ -38,6 +49,7 @@ require('./config/passport')(passport);
 app.use(express.json());
 app.use('/product', product)
 app.use('/users', users)
+app.use('/cart', cart)
 
 // Index Route
 app.get('/', (req, res) => {

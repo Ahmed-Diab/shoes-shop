@@ -50,7 +50,9 @@
           <h4 class="card-title">Price : {{product.price | currency: 'USD'  }}</h4>
         </div>
         <button (click)='goBack()' class="btn transparent">back</button>
-        <button (click)='addtoCart(product)' class="btn float-right transparent">bay now</button>
+
+        <button (click)='addToSession(product)' class="btn float-right transparent">bay now</button>
+        <!-- <button (click)='addtoCart(product)' class="btn float-right transparent">bay now</button> -->
     </div>
   <!-- display product info -->
   

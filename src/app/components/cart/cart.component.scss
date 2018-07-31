@@ -3,6 +3,11 @@
 input{
     color: $color_4 !important;
 }
+i{
+    color:$color_3;
+    font-size: 18px;
+    cursor: pointer;
+}
 .table{
     td th{
         border-color: $color_1;

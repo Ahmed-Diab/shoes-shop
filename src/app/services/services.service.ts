@@ -30,8 +30,25 @@ export class ServicesService {
 
   getShoes(){
     return this.http.get(`${this.url}/product`).pipe( catchError(this.handleError));
-  
   }
+  // cart 
+  getCart(){
+    return this.http.get(`${this.url}/cart`).pipe( catchError(this.handleError));
+  }
+  minusCart(id){
+    return this.http.get(`${this.url}/cart/minus/${id}/cart`).pipe( catchError(this.handleError));
+  }
+  plusCart(id, size){
+    return this.http.get(`${this.url}/cart/plus/${id}/${size}/cart`).pipe( catchError(this.handleError));
+  }
+  getCartById(id, size){
+    return this.http.get(`${this.url}/cart/${id}/${size}`).pipe( catchError(this.handleError));
+  }
+  removeCart(id){
+    return this.http.get(`${this.url}/cart/remove/${id}/remove`).pipe( catchError(this.handleError));
+  }
+
+
   getUsers(){
     return this.http.get(`${this.url}/users`).pipe( catchError(this.handleError));
   }
