@@ -2,7 +2,7 @@
 
 This project was generated with MEAN stake
 
-you must have install mangodb befor run this app
+you must have install mangodb befor run this app.
 Run `npm install`
 
 Run `node server` or `nodemon server` if you have it in npm for a dev server. Navigate to `http://localhost:3000/`.
