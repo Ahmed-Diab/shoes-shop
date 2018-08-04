@@ -52,11 +52,6 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
   });
   } // end ngOnInit
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
-
-
 getByid(ar, _id) {
     var obj = ar.filter(function(node) {
         return node._id == _id;
@@ -81,18 +76,20 @@ addToSession(product){
     this._flashMessages.show('plz select your size', { cssClass: 'alert-danger', timeout: 3000 });
   }else{
     let id = product._id;
-    this._services.getCartById(id, this.size).subscribe((res:any)=>{
+    this.subscription = this._services.getCartById(id, this.size).subscribe((res:any)=>{
       let u = res.cart
       this.itemsLength = u.length;
       this._services.changeData(this.itemsLength);
-      console.log(u);
       window.scrollTo(0, 0)
       this._flashMessages.show('saved', { cssClass: 'alert-success', timeout: 1000 });
-
     });
   }
 }
    
+ngOnDestroy(){
+  this.subscription.unsubscribe();
+}
+
 }
   
 

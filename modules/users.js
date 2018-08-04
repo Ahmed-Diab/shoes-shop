@@ -22,7 +22,14 @@ var newUser = mongoose.Schema({
     invok:{
       type:Array
     },
-    updated_date: { type: Date, default: Date.now }
+    updated_date: { 
+      type: Date, 
+      default: Date.now
+     },
+    block:{
+      type:Boolean, 
+      default:false
+    }
 });
 
 const User = module.exports = mongoose.model('User', newUser);
@@ -45,7 +52,8 @@ module.exports.getUserById = function(id, callback) {
       });
     });
   }
-  
+
+
   module.exports.comparePassword = function(candidatePassword, hash, callback) {
     bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
       if(err) throw err;

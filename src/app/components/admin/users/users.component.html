@@ -4,7 +4,7 @@
   <!-- end flash messages -->
 <div class="row">
   <div class="col-12">
-    <div *ngIf="users[0]">
+    <div>
       <table class="table">
         <thead>
           <tr class="text-capitalize">
@@ -13,6 +13,7 @@
             <th>name</th>
             <th>email</th>
             <th>edit</th>
+            <th>Block User</th>
             <th>remove</th>
           </tr>
         </thead>
@@ -20,14 +21,57 @@
           <tr *ngFor="let user of users; let i = index">
             <td scope="row">{{ i+1 }}</td>
             <td scope="row" > 
-              <img src="/users_images/{{user.image}}" [alt]=user.img  class="img-fluid"  style="width: 45px; height: 45px;" >
+              <img src="/users-images/{{user.image}}" [alt]=user.img  class="img-fluid"  style="width: 45px; height: 45px;" >
             </td>
             <td scope="row">{{user.username}}</td>
             <td scope="row">{{user.email}}</td>
-            <td scope="row"><button (click)='editUser(user.id)' class="btn ">edit</button></td>
-            <td scope="row"><button (click)='removeUser(user.id)' class="btn ">remove</button></td>
+            <td scope="row">
+              <button  class="btn " (click)='editUserForm(user)'>edit</button>
+            </td>
+            <td class="row">
+              <button (click)='blockUser(user._id)' class="btn" *ngIf="!user.block">block</button>
+              <button (click)='unblockUser(user._id)' class="btn" *ngIf="user.block">unblock</button>
+            </td>
+
+            <td scope="row">
+              <button (click)='removeUser(user._id)'class="btn">remove</button>
+            </td>
           </tr>
         </tbody>
         </table>
   </div>
 </div>
+
+<div class="overlay">
+    <div id="sample">
+      <div class="row">
+        <div class="col-6">
+            <form  (submit)='editOldUser(_id)'>
+                <div class="form-group position-relative text-center" style="height: 50px;">
+                  <span class="image_span position-absolute" >select image</span>
+                    uplode use method 
+                  <input id="user_edit_image" name="user_edit_image" type="file" /> 
+                </div>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" autocomplete="off" [(ngModel)]="username" name="username" class="form-control" placeholder="Enter Username">
+                </div>
+                <!-- <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" autocomplete="off" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder=" Enter Password">
+                </div>
+                <div class="form-group">
+                  <label for="repassword">Re Password</label>
+                  <input type="password" [(ngModel)]="repassword" name="repassword" class="form-control" id="repassword" placeholder=" Re Password">
+                </div> -->
+                <button type="submit" class="btn btn-large">Submit</button>
+              </form>
+        </div>
+      </div>
+
+  </div>
+  </div>

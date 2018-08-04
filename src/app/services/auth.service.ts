@@ -8,8 +8,7 @@ export class AuthService {
   authToken:any;
   user:any;
   isDev:Boolean;
-  _url:string = 'http://localhost:3000';
-  // _url = '';
+  _url = this._service.url;
   tu:Boolean = false;
   constructor(
     private http:HttpClient,
@@ -49,6 +48,7 @@ export class AuthService {
   loggedIn() {
     return tokenNotExpired('token');
   }
+  
   loadToken() {
     const token = localStorage.getItem('token');
     this.authToken = token;

@@ -5,12 +5,12 @@
         <app-navbar></app-navbar>
     </div>
     <div class="col-12 col-xl-9 cont" scrollable (scrollPosition)='scrollHandelar($event)'>
-        <div id="page" class="routerContaner p-3" [@routeAnimation]="getDepth(myOutlet)">
+        <div id="page" class="routerContaner pt-3" [@routeAnimation]="getDepth(myOutlet)">
             <router-outlet #myOutlet='outlet'></router-outlet>
         </div>
     </div>
     <div class="col-3 d-none d-xl-block"></div>
-    <div class="col-12 col-xl-9 pl-0 pr-0">
+    <div class="col-12 col-xl-9 pl-0 pr-0 mt-3">
         <app-footer></app-footer>
     </div>
 

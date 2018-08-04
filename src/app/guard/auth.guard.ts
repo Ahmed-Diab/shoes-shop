@@ -16,6 +16,5 @@ canActivate() {
     this._router.navigate(['/login']);
     return false;
   }
-  
 }
 } 

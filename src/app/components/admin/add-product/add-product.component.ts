@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClient } from '@angular/common/http';
 import { ServicesService } from '../../../services/services.service';
 import { ValidateService } from '../../../services/validate.service';
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -10,7 +11,7 @@ import { ValidateService } from '../../../services/validate.service';
 })
 export class AddProductComponent implements OnInit {
   //Shoes sizess quntty
-  dis:string;
+  dis    :string;
   size_41:string;
   size_42:string;
   size_43:string;
@@ -68,7 +69,16 @@ export class AddProductComponent implements OnInit {
     this._flash_messages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000})  
 
   }
-  if (fileCount > 0) { // a file was selected
+  if(fileCount > 4){
+    this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+    this.imagesURL = undefined
+  }
+  if(fileCount < 4){
+    this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+    this.imagesURL = undefined
+
+  }
+  if (fileCount === 4) { // a file was selected
     for (var i = 0;  i < fileCount; i++) {
       formData.append("images", inputEl.files[i]);
     }
@@ -94,14 +104,15 @@ export class AddProductComponent implements OnInit {
       (err)=>{
         window.scrollTo(0, 0),
         this._flash_messages.show(err.message , { cssClass: 'alert-danger', timeout: 20000 });
-        console.log(err)
       });
-
+      this.imagesURL = []
   }
 //check if the filecount is greater than zero, to be sure a file was selected.
 
   // to see images when selected
   onChange(file:any){
+    this.imagesURL = []
+
     for (var i = 0; i < file.length; i++) {
       // this.selectUpload.push(file[i].name);
       var fi = file[i];

@@ -28,7 +28,6 @@ router.get('/', (req, res, next)=>{
 router.get('/:id/:size', (req, res, next)=>{
     var productID = req.params.id
     var productSize = req.params.size
-
     req.session.cart = req.session.cart || [];
     var cart = req.session.cart;
     Productes.findById(req.params.id, (err, product)=>{

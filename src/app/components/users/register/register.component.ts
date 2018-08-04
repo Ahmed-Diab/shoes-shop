@@ -3,6 +3,7 @@ import { ValidateService } from '../../../services/validate.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '../../../../../node_modules/@angular/router';
 import { FlashMessagesService } from '../../../../../node_modules/angular2-flash-messages';
+import { ServicesService } from '../../../services/services.service';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +24,24 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private el: ElementRef,
+    private _services:ServicesService,
     private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
-        // to make window scroll top
-        window.scrollTo(0,0)
-
+        window.scrollTo(0, 0);
   }
+
+  // to see images when selected
+  onChange(file:any){
+    for (var i = 0; i < file.length; i++) {
+      var fi = file[i];
+      var imageReader = new FileReader();
+      imageReader.onload = (event:any)=>{
+        this.imagesURL = event.target.result;
+        }
+      imageReader.readAsDataURL(fi);
+      }
+    }
 
   // registry submit function
   onRegisterSubmit() {
@@ -47,18 +59,13 @@ export class RegisterComponent implements OnInit {
       this.email = '';
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       window.scrollTo(0, 0);
-
       return false;
     }
 
     // Validate Email
     if(!this.validateService.validateEmail(user.email)) {
-      this.username = '';
-      this.password = '';
-      this.email = '';
     this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 3000});
     window.scrollTo(0, 0);
-
       return false;
     }
 
@@ -74,6 +81,11 @@ export class RegisterComponent implements OnInit {
  let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#user_image');
  //create a new fromdata instance
          let formData = new FormData();
+         if (inputEl.files.length !== 1) {
+          this.flashMessage.show('PLZ select profile image', {cssClass: 'alert-danger', timeout: 3000});
+          window.scrollTo(0, 0);
+          return false;
+         }
  //check if the filecount is greater than zero, to be sure a file was selected.
   formData.append("user_image", inputEl.files[0]);
   //   // Register user
@@ -87,7 +99,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/login']);
       
     } else {
-      this.flashMessage.show(data.errMSG.message, {cssClass: 'alert-danger', timeout: 10000});
+      this.flashMessage.show(data.errMSG, {cssClass: 'alert-danger', timeout: 10000});
       this.router.navigate(['/register']);
       window.scrollTo(0, 0);
     }
@@ -96,17 +108,5 @@ export class RegisterComponent implements OnInit {
   }
 );
 } // end on registre submit
-
-    // to see images when selected
-    onChange(file:any){
-      for (var i = 0; i < file.length; i++) {
-        var fi = file[i];
-        var imageReader = new FileReader();
-        imageReader.onload = (event:any)=>{
-          this.imagesURL = event.target.result;
-          }
-        imageReader.readAsDataURL(fi);
-        }
-      }
 
 }

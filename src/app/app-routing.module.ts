@@ -15,6 +15,8 @@ import { UsersComponent } from './components/admin/users/users.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { MessegesComponent } from './components/admin/messeges/messeges.component';
+import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
+import { AdminRegisterComponent } from './components/admin/admin-register/admin-register.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'home', pathMatch:'full'},
@@ -25,13 +27,16 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent, data:{depth:'register'}},
   {path:'contact', component:ContactComponent, data:{depth:'contact'}},
   {path:'profile', component:ProfileComponent, data:{depth:'profile'}, canActivate:[AuthGuard]},
-  {path:'admin/login', component:LoginComponent, data:{depth:'login'}},
+  {path:'admin/login', component:AdminLoginComponent},
+
 
   {path:'admin', component:AdminHomeComponent, canActivate:[AdminGuard], children:[
-    {path:'', redirectTo:'add', pathMatch:'full'},
+    {path:'', redirectTo:'users', pathMatch:'full'},
     {path:'add', component:AddProductComponent},
     {path:'edit', component:EditProductComponent},
-    {path:'users', component:UsersComponent}
+    {path:'users', component:UsersComponent},
+    {path:'messages', component:MessegesComponent},
+    {path:'admin/register', component:AdminRegisterComponent},
   ]},
 
   
@@ -59,5 +64,7 @@ export const routingComponant = [
   EditProductComponent,
   UsersComponent,
   MessegesComponent,
+  AdminLoginComponent,
+  AdminRegisterComponent,
 
 ]

@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
-import { throwError, BehaviorSubject } from '../../../node_modules/rxjs';
+import { throwError, BehaviorSubject, Observable } from '../../../node_modules/rxjs';
 import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
-
-
-  // url='';
-  url:string = 'http://localhost:3000';
-
+  url='';
+  // url:string = 'http://localhost:3000';
+  
   // to make share data in all componant
   private dataSrc = new BehaviorSubject<number>(0);
-  private suc = new BehaviorSubject<boolean>(false);
+  private dataAdmin = new BehaviorSubject<boolean>(false);
+
   crentData = this.dataSrc.asObservable();
-  crentSucsess = this.suc.asObservable();
+  crentAdmin = this.dataAdmin.asObservable();
   constructor(
     private http:HttpClient,
   ) { }
@@ -23,10 +22,10 @@ export class ServicesService {
     changeData(num){
       this.dataSrc.next(num)
     }
-    // to change data sharing
-    changeSuc(su){
-      this.suc.next(su)
+    changeAdmin(success){
+      this.dataAdmin.next(success)
     }
+
 
   getShoes(){
     return this.http.get(`${this.url}/product`).pipe( catchError(this.handleError));
@@ -46,11 +45,6 @@ export class ServicesService {
   }
   removeCart(id){
     return this.http.get(`${this.url}/cart/remove/${id}/remove`).pipe( catchError(this.handleError));
-  }
-
-
-  getUsers(){
-    return this.http.get(`${this.url}/users`).pipe( catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {

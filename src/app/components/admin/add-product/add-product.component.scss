@@ -2,9 +2,9 @@
 @import "../../../../assets/scss/imports";
 
 
-input{
-    @extend %inputFild;
-}
+// input{
+//     @extend %inputFild;
+// }
 select{
     @extend %inputSelect
 }
@@ -22,4 +22,45 @@ select{
     position: absolute;
     background-color: $color_4;
     color: $font_light;
+}
+form{
+    padding: 25px;
+    box-shadow: 0 0 10px $color_4;
+    border-radius: 5px;
+
+   input{
+        width: 100%;
+        padding: 1em;
+        border: none;
+        border-bottom: solid $color_3 2px;
+        background-color: transparent;
+        color:$color_4 !important;
+        border-radius: 0;
+
+        &::placeholder{
+            color:$color_3;
+            transition: all ease .5s;
+
+        }
+        &:focus{
+          outline: none !important;
+          box-shadow: 0 0 0;
+          &::placeholder{
+            transform: scale(0)
+        }
+      }
+    }
+    button {
+        text-transform: capitalize;
+        cursor: pointer;
+        color: $font_dark;
+        font-weight: 700;
+        letter-spacing: 2px;
+        background-color: $color_3;
+        &:hover{
+            background-color: $color_4;
+            color: $font_light;
+
+        }
+    }
 }

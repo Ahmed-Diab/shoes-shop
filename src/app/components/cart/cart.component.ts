@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, OnDestroy } from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 import { ServicesService } from '../../services/services.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +9,7 @@ import { Subscription } from '../../../../node_modules/rxjs';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CartComponent implements OnInit {
   totalprice: any;
   data:any = [];
   cartLength:any;
@@ -17,7 +17,6 @@ export class CartComponent implements OnInit, OnDestroy {
   totalQut:any;
   quntty:number;
   globalListener: any;
-  subscription: Subscription;
 constructor(
   private service:ServicesService,
   private renderer: Renderer,
@@ -26,17 +25,11 @@ constructor(
 ) { }
 // private productAddedSource = new Subject<any>()
 ngOnInit() {
-  var items = [];
-  this.subscription = this.service.getCart().subscribe((res:any)=>{
-     items = res.cart.items;
-    this.data = res.cart
+  this.service.getCart().subscribe((res:any)=>{
+    this.data = res.cart;
   })
-  this.service.changeData(items.length);
 
 } // end ngOnInit
-ngOnDestroy(){
-  this.subscription.unsubscribe();
-}
 //remove item
 removeItemById(id:string){
   this.service.removeCart(id).subscribe((res:any)=>{
@@ -49,6 +42,8 @@ removeItemById(id:string){
 plusQut(id, size){
   this.service.plusCart(id, size).subscribe((res:any)=>{
     this.data = res.cart;
+    this.service.changeData(this.data.items.length);
+
   });
 } // end change quntty plus
 

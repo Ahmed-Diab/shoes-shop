@@ -18,6 +18,7 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminGuard } from './guard/admin.guard';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AdminGuard } from './guard/admin.guard';
     SpinnerComponent,
     ScrollTopComponent,
     routingComponant,
+
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,16 @@ import { AdminGuard } from './guard/admin.guard';
     NgxEditorModule,
     NgxPaginationModule
   ],
-  providers: [ServicesService, FlashMessagesService, ValidateService, AuthService, AuthGuard, AdminGuard],
+  providers: [
+    ServicesService,
+    FlashMessagesService,
+    ValidateService, 
+    AuthService, 
+    AuthGuard, 
+    AdminGuard, 
+    AdminService
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

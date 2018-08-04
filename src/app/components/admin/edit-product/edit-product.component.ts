@@ -16,7 +16,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   value:string = '';
   subscription:Subscription;
   imagesURL:any = [];
-  dis:any = 'hello' ;
+  newdis:any = 'hello' ;
   title:string;
   category:string = 'men';
   price:string;
@@ -33,6 +33,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   size_45:string;
   size_46:string;
   id:string;
+  url:string;
   constructor(
     private _http: HttpClient,
     private el: ElementRef,
@@ -42,6 +43,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.url =  this._services.url;
     this.subscription = this._services.getShoes().subscribe((res:any)=>{
       if (res.success) {
         this.data = res.data;
@@ -54,8 +56,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     // if error 
     (error:any) =>{
       this._flash_messages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 }),
-      this.spinner = false,
-      console.log(error)
+      this.spinner = false
     });
 }
 ngOnDestroy(): void {
@@ -68,7 +69,7 @@ remove(e, product){
   let id = product._id;
       return this._http.get(`/product/${id}/remove`).subscribe((res:any)=>{
         if(res.success){
-          setTimeout(function(){e.target.parentElement.remove()}, 500);
+          setTimeout(()=>{e.target.parentElement.remove()}, 500);
           e.target.parentElement.classList.add('displayNone');
         }
       })
@@ -76,6 +77,8 @@ remove(e, product){
 
 // to see images when selected
 onChange(file:any){
+  this.imagesURL = []
+
   for (var i = 0; i < file.length; i++) {
     // this.selectUpload.push(file[i].name);
     var fi = file[i];
@@ -87,10 +90,9 @@ onChange(file:any){
     }
   }
 editProduct($event, product){
-
   var overlay = document.querySelector('.overlay');
   overlay.classList.add('display');
-  this.dis       = product.dis
+  this.newdis       = product.dis
   // this.imagesURL = product.
   this.title     = product.title;
   this.category  = product.category;
@@ -106,36 +108,45 @@ editProduct($event, product){
 }
 
 uploadProduct(){
-//   var product = {
-//     dis          : this.dis        ,
-//     imagesURL    : this.imagesURL  ,
-//     title        : this.title      ,
-//     category     : this.category   ,
-//     price        : this.price      ,
-//     size_41      : this.size_41    ,
-//     size_42      : this.size_42    ,
-//     size_43      : this.size_43    ,
-//     size_44      : this.size_44    ,
-//     size_45      : this.size_45    ,
-//     size_46      : this.size_46    ,
-// }
-// if (!this._valdete.validateAddProduact(product)) {
-//   window.scrollTo(0, 0);
-//   this._flash_messages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000})  
-// };
+  var product = {
+    imagesURL    : this.imagesURL  ,
+    title        : this.title      ,
+    category     : this.category   ,
+    price        : this.price      ,
+    size_41      : this.size_41    ,
+    size_42      : this.size_42    ,
+    size_43      : this.size_43    ,
+    size_44      : this.size_44    ,
+    size_45      : this.size_45    ,
+    size_46      : this.size_46    ,
+}
+if (!this._valdete.validateAddProduact(product)) {
+  window.scrollTo(0, 0);
+  this._flash_messages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000})  
+};
 // locate the file element meant for the file upload.
-      // let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#images');
+      let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#images');
 //get the total amount of files attached to the file input.
-      // var fileCount: number = inputEl.files.length;
+      var fileCount: number = inputEl.files.length;
 //create a new fromdata instance
       let formData = new FormData();
+      if(fileCount > 4){
+        this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+        this.imagesURL = undefined
+      }
+      if(fileCount < 4){
+        this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+        this.imagesURL = undefined
+    
+      }
 //check if the filecount is greater than zero, to be sure a file was selected.
-// if (fileCount > 0) { // a file was selected
-// for (var i = 0;  i < fileCount; i++) {
-//   formData.append("images", inputEl.files[i]);
-// }
+if (fileCount == 0) { // a file was selected
+for (var i = 0;  i < fileCount; i++) {
+  formData.append("images", inputEl.files[i]);
+  }
+}
 formData.append('title',       this.title);
-formData.append('dis',         this.dis);
+formData.append('dis',         this.newdis);
 formData.append('category',    this.category);
 formData.append('price',       this.price);
 formData.append('size_41',     this.size_41);
@@ -147,21 +158,37 @@ formData.append('size_46',     this.size_46);
 // }
 this._http.post(`/product/${this.id}/edit`, formData).subscribe((res:any) => {
   if (res.success) {
+    this.subscription = this._services.getShoes().subscribe((res:any)=>{
+      if (res.success) {
+        this.data = res.data;
+        this.spinner = false;
+      }
+      if(!res.success){
+        this._flash_messages.show(res.errMSG , { cssClass: 'alert-danger', timeout: 20000 });
+      }
+    },
+    // if error 
+    (error:any) =>{
+      this._flash_messages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 }),
+      this.spinner = false
+    });
+
     var overlay = document.querySelector('.overlay');
     overlay.classList.remove('display');
     window.scrollTo(0, 0);
     this._flash_messages.show(res.MSG, {cssClass:'alert-success', timeout:3000})
-    console.log(res)
+    this.imagesURL = []
+
   }else{
     window.scrollTo(0, 0);
     this._flash_messages.show(res.errMSG, {cssClass:'alert-danger', timeout:5000})   
-    console.log(res)
+    this.imagesURL = []
+
   }
 },
 (err)=>{
   window.scrollTo(0, 0),
   this._flash_messages.show(err.message , { cssClass: 'alert-danger', timeout: 20000 });
-  console.log(err)
 });
 }
 }

@@ -14,7 +14,7 @@
   <div class="row justify-content-around">
     <div class="col-sm-3 mt-4" *ngFor="let product of data">
       <div class="card position-relative">
-        <img  class="img-fluid" title="{{product.title}}" src='/images/{{product.images[0]}}'  [alt]=product.title>
+        <img  class="img-fluid" title="{{product.title}}" src='{{url}}/images/{{product.images[0]}}'  [alt]=product.title>
       </div>
       <i class="fa fa-remove position-absolute" title="remove product" (click)='remove($event, product)'></i>
       <i class="fa fa-edit position-absolute" title="edit product" (click)='editProduct($event, product)'></i>
@@ -33,15 +33,17 @@
     <div class="row">
     <!-- start  form -->
         <div class="col-12">
-                <flash-messages></flash-messages>
+            <flash-messages></flash-messages>
             <form class="form-signin text-capitalize font-weight-bold">
+            <h3>old images</h3>
                 <div class="row">
-                        <div class="col-3 col-md-3 mt-2" *ngFor="let image of images">
-                                <div class="card position-relative">
-                                  <img  class="card-img-top" src='/images/{{image}}' [alt]=image (click)='changeImg(image)'>
-                                </div>
+                        <div class="col-3 mt-2" *ngFor="let image of images">
+                            <div class="card position-relative">
+                                <img  class="card-img-top" src='/images/{{image}}' [alt]=image>
                             </div>
-                        <!-- <div class="col-12">
+                        </div>
+                        <h3 *ngIf="imagesURL.length > 0">new images</h3>
+                        <div class="col-12">
                                 <div class="row">
                                     <div class="col-3 img-fluid pr-0 pt-2 pb-1" *ngFor="let image of imagesURL; let name of selectUpload;">
                                         <figure>
@@ -49,18 +51,22 @@
                                             <figcaption style="max-width: 300px"></figcaption>
                                         </figure>
                                     </div>
+                                <div class="col-12">
+                                    <div class="form-group position-relative">
+                                            <span class="image_span position-absolute text-center" >select image</span>
+                                        <input id="images" name="images" multiple type="file" (change)='onChange($event.target.files)' /> 
+                                    </div>
                                 </div>
-                                <div class="form-group position-relative">
-                                        <span class="image_span position-absolute text-center" >select image</span>
-                                    <input id="images" name="images" multiple type="file" (change)='onChange($event.target.files)' /> 
-                                </div> -->
             <!-- end images upload -->
-            <!-- start discription -->
+                                <!-- start discription -->
                                 <h4>discription :</h4>
-                                <div  class="form-group">
-                                    <!-- <angular-editor  name='dis'[(ngModel)]="dis"></angular-editor>  -->
-                                </div>
-            <!-- end discription -->
+                                 <div class="col-12">
+                                        <!-- <div[innerHtml]='dis'></div> -->
+                                        <div  class="form-group">
+                                            <!-- <angular-editor  name='newdis'[(ngModel)]="newdis" ></angular-editor>  -->
+                                        </div>
+                                </div> 
+                                <!-- end discription -->
                             <!-- </div> -->
                     <div class="col-12 justify-content-center">
                         <div class="form-group">
@@ -115,13 +121,16 @@
     <!-- start submit button -->
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="btn btn-lg btn-primary" (click)='uploadProduct()'  type="button" value="save" >
+                                <button class="btn btn-lg" (click)='uploadProduct()'>save</button>
                             </div>
                         </div>
     <!-- end submit button -->
+                </div>
+                </div>
                 </div>
             </form>
         </div>
     <!-- end  form -->
       </div>  
+</div>
 </div>

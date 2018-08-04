@@ -78,7 +78,10 @@ router.post('/', (req, res, next)=>{
     upload(req, res, (err) => {
         if(err)  {
             res.json({success:false, errMSG: err.message});
-        } else{
+            return
+        } 
+        // to make shor product images = 4 pics
+        if(req.files.length === 4){
             var req_images = [];
             for (const image of req.files) {
                 req_images.push(image.filename);
@@ -127,63 +130,105 @@ router.post('/', (req, res, next)=>{
                         res.json({success:true, MSG: 'saved'});
                     }
                 })// end save new schema to mongose
-            } // end add new product to Shoes
+            }else{
+                res.json({success:false, errMSG: 'you must select 4 images not more not less'});
+                return;
+            }
             })
 }) // end post new shose
 ///////////////////////////////////////// start post data /////////////////////////////////////
 // start post new shose
 router.post('/:id/edit', (req, res, next)=>{     
     upload(req, res, (err) => {
+        // if req.files
+        var category = req.body.category,
+        price      = parseInt(req.body.price),
+        title      = req.body.title,
+        dis        = req.body.newdis,
+        size_41    = parseInt(req.body.size_41),
+        size_42    = parseInt(req.body.size_42),
+        size_43    = parseInt(req.body.size_43);
+        size_44    = parseInt(req.body.size_44),
+        size_45    = parseInt(req.body.size_45),
+        size_46    = parseInt(req.body.size_46);
         if(err)  {
             res.json({success:false, errMSG: err.message});
-        } else{
-            // var req_images = [];
-            // for (const image of req.files) {
-            //     req_images.push(image.filename);
-            //     im.resize({
-            //         srcPath:  process.cwd() + '/public/images/' + image.filename,
-            //         dstPath:  process.cwd() + '/public/small-images/small_'+image.filename,
-            //         width:80
-            //       }, function(err, stdout, stderr){
-            //         if (err) {
-            //             console.log('error while resizing images' + stderr);
-            //             throw err;
-            //         }else{
-            //             console.log('resize done')
-            //         }
-            //       });
-            // }                 
-                var category = req.body.category,
-                    price      = parseInt(req.body.price),
-                    title      = req.body.title,
-                    dis        = req.body.dis,
-                    size_41    = parseInt(req.body.size_41),
-                    size_42    = parseInt(req.body.size_42),
-                    size_43    = parseInt(req.body.size_43);
-                    size_44    = parseInt(req.body.size_44),
-                    size_45    = parseInt(req.body.size_45),
-                    size_46    = parseInt(req.body.size_46);
-                Shoes.findByIdAndUpdate(req.params.id, {
-                    category:category,
-                    price   :price,
-                    dis     :dis,
-                    title   :title,
-                    size_41 :size_41,
-                    size_42 :size_42,
-                    size_43 :size_43,
-                    size_44 :size_44,
-                    size_45 :size_45,
-                    size_46 :size_46
-                    // images  :req_images
-                }, (err)=>{
+        }
+        if(req.files.length === 4){
+            var req_images = [];
+            for (const image of req.files) {
+                req_images.push(image.filename);
+                im.resize({
+                    srcPath:  process.cwd() + '/public/images/' + image.filename,
+                    dstPath:  process.cwd() + '/public/small-images/small_'+image.filename,
+                    width:80
+                  }, function(err, stdout, stderr){
                     if (err) {
-                        res.json({success:false, errMSG: err.message});
+                        console.log('error while resizing images' + stderr);
+                        throw err;
                     }else{
-                        res.json({success:true, MSG: 'saved'});
+                        console.log('resize done')
                     }
-                })// end save new schema to mongose
-            } // end add new product to Shoes
+                  });
+            }
+            Shoes.findById(req.params.id, (err, product)=>{
+                if (err) {
+                    res.json({success:false, errMSG:err.message})
+                }else{
+        // to remove product images from src folder
+                    for (const i of product.images) {
+                        fs.unlink('./public/images/'+i, (err) => {
+                            if (err) throw err;
+                            });
+                        fs.unlink('./public/small-images/small_'+i, (err) => {
+                            if (err) throw err;
+                        });
+                    } // end remove product images from src folder
+                }
             })
+        Shoes.findByIdAndUpdate(req.params.id, {
+            category:category,
+            price   :price,
+            dis     :dis,
+            title   :title,
+            size_41 :size_41,
+            size_42 :size_42,
+            size_43 :size_43,
+            size_44 :size_44,
+            size_45 :size_45,
+            size_46 :size_46,
+            images  :req_images
+        }, (err, product)=>{
+            if (err) {
+                res.json({success:false, errMSG: err.message});
+            }else{
+                res.json({success:true, MSG: 'saved'});
+            }
+        })// end save new schema to mongose
+    }
+    if (req.files.length === 0){
+        Shoes.findByIdAndUpdate(req.params.id, {
+            category:category,
+            price   :price,
+            dis     :dis,
+            title   :title,
+            size_41 :size_41,
+            size_42 :size_42,
+            size_43 :size_43,
+            size_44 :size_44,
+            size_45 :size_45,
+            size_46 :size_46,
+        }, (err)=>{
+            if (err) {
+                res.json({success:false, errMSG: err.message});
+            }else{
+                res.json({success:true, MSG: 'saved'});
+            }
+        })// end save new schema to mongose
+    }else{
+        res.json({success:false, errMSG: 'you must select 4 images not more not less'});
+    }
+    })
 }) // end post new shose
 
 // start to get param by id

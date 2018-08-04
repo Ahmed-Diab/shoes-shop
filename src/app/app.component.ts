@@ -14,7 +14,7 @@ export class AppComponent {
   spinner:Boolean = false;
   itemsLength: any;
   constructor(
-    private _services:ServicesService
+    private _services:ServicesService,
   ) { 
     // window load function
 
@@ -28,17 +28,17 @@ export class AppComponent {
     });
   }
   ngOnInit() {
+    var items:any = [];
     window.scrollTo(0, 0);
-    // this._services.getCart().subscribe((res:any)=>{
-    //   let u = res.cart
-    //   this.itemsLength = u.length;
-    //   this._services.changeData(this.itemsLength);
-    // })
-    // this._services.changeData(this.data.items.length);
+     this._services.getCart().subscribe((res:any)=>{
+      items = res.cart;
+     this._services.changeData(items.items.length);
+   });
+
   }
 
   getDepth(outlet){
-  return  outlet.activatedRouteData.depth || null;
+    return  outlet.activatedRouteData.depth || null;
   }
 
 }

@@ -25,12 +25,7 @@ export class HomeComponent implements OnInit {
   ) {  }
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.subscription = this._services.getCart().subscribe((res:any)=>{
-      let u = res.cart
-      this._services.changeData(u.length);
-    })
     this.url = this._services.url;
-    window.scrollTo(0,0);
     // get data from url
     this.subscription = this._services.getShoes().subscribe((res:any)=>{
       if (res.success) {

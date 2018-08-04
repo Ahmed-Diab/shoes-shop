@@ -1,0 +1,30 @@
+<h2>Register</h2>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <flash-messages></flash-messages>
+  <div>
+    <form (submit)="onRegisterSubmit()" >
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" autocomplete="off" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" autocomplete="off" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder=" Enter Password">
+        </div>
+        <div class="form-group">
+          <label for="repassword">Re Password</label>
+          <input type="password" [(ngModel)]="repassword" name="repassword" class="form-control" id="repassword" placeholder=" Re Password">
+        </div>
+        <button type="submit" class="btn btn-large" >Submit</button>
+      </form>
+    </div>
+  </div>
+<!-- end registre page -->
+</div>

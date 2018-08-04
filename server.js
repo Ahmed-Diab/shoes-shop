@@ -15,7 +15,7 @@ const app = express();
 
 
 // Connect To Database (OLD CODE)
-mongoose.connect(config.database, { useMongoClient: true});
+mongoose.connect(config.database, { useNewUrlParser: true });
 // On Connection
 mongoose.connection.on('connected', () => {
   console.log('Connected to Database '+ config.database);
@@ -27,10 +27,15 @@ mongoose.connection.on('error', (err) => {
 const product = require('./routes/product');
 const users = require('./routes/users');
 const cart = require('./routes/cart');
+const admin = require('./routes/admin');
+
 
 app.use(cookieParser())
 app.use(session({ 
-  secret: 'keyboard cat', cookie: { maxAge: 600000000 }
+  secret: 'werfrewfgreferf',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 
 
@@ -50,6 +55,7 @@ app.use(express.json());
 app.use('/product', product)
 app.use('/users', users)
 app.use('/cart', cart)
+app.use('/admin', admin)
 
 // Index Route
 app.get('/', (req, res) => {
