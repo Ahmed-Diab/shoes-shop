@@ -141,7 +141,7 @@ if(product.title === undefined || product.category === undefined || product.pric
     
       }
 //check if the filecount is greater than zero, to be sure a file was selected.
-if (fileCount == 0) { // a file was selected
+if (fileCount == 4) { // a file was selected
 for (var i = 0;  i < fileCount; i++) {
   formData.append("images", inputEl.files[i]);
   }

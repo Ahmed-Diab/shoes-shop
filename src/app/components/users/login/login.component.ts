@@ -11,6 +11,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { Title } from '../../../../../node_modules/@angular/platform-browser';
 
 
 @Component({
@@ -40,10 +41,13 @@ export class LoginComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _flashMessages: FlashMessagesService,
-    private _services:ServicesService
+    private _services:ServicesService,
+    private _title:Title
   ) {  }
 
   ngOnInit() {
+    this._title.setTitle("Shoes Shop | Login")
+
     window.scrollTo(0, 0);  
   }
   //  on login submit function

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '../../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _title:Title
+  ) { }
 
   ngOnInit() {
+    this._title.setTitle("Shoes Shop | Admin ")
+
   }
 
 }

@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from '../../../../node_modules/rxjs';
 import { ServicesService } from '../../services/services.service';
 import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
+import { Title } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-cart',
@@ -24,10 +25,13 @@ constructor(
   private renderer: Renderer,
   private _auth:AuthService,
   private _router:Router,
-  private _flashMessages:FlashMessagesService
+  private _flashMessages:FlashMessagesService,
+  private _title:Title
 ) { }
 // private productAddedSource = new Subject<any>()
 ngOnInit() {
+  this._title.setTitle("Shoes Shop | Cart")
+
   this.subscription = this._services.getCart().subscribe((res:any)=>{
     this.data = res.cart;
   },  // if error 

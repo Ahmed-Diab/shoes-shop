@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
 import { ServicesService } from '../../services/services.service';
+import { Title } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -13,10 +14,12 @@ export class ContactComponent implements OnInit {
   message:string;
     constructor(
       private _services:ServicesService,
-      private _flashMessages:FlashMessagesService
+      private _flashMessages:FlashMessagesService,
+      private _title:Title
     ) { }
   
     ngOnInit() {
+      this._title.setTitle("Shoes Shop | Contact")
       window.scrollTo(0, 0);
 
     }

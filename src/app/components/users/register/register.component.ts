@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '../../../../../node_modules/@angular/router';
 import { FlashMessagesService } from '../../../../../node_modules/angular2-flash-messages';
 import { ServicesService } from '../../../services/services.service';
+import { Title } from '../../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -25,10 +26,13 @@ export class RegisterComponent implements OnInit {
     private _router: Router,
     private element: ElementRef,
     private _services:ServicesService,
-    private _flashMessages: FlashMessagesService) { }
+    private _flashMessages: FlashMessagesService,
+    private _title:Title
+  ) {  }
 
   ngOnInit() {
-        window.scrollTo(0, 0);
+    this._title.setTitle("Shoes Shop | Register")
+    window.scrollTo(0, 0);
   }
 
   // to see images when selected

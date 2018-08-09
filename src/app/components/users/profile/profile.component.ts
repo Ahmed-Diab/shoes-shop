@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FlashMessagesService } from '../../../../../node_modules/angular2-flash-messages';
 import { AdminService } from '../../../services/admin.service';
+import { Title } from '../../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -17,13 +18,15 @@ export class ProfileComponent implements OnInit {
     private _auth:AuthService,
     private _flashMessages:FlashMessagesService,
     private _admin:AdminService,
-    private element:ElementRef
-  ) { }
+    private element:ElementRef,
+    private _title:Title
+  ) {  }
 
   ngOnInit() {
     window.scrollTo(0, 0);
     this._auth.getProfile().subscribe((data:any) => {
       this.user = data.user;
+      this._title.setTitle("Shoes Shop | " + this.user.username)
       this.newUsername = this.user.username;
       this.imagesURL = '/users-images/'+this.user.image;
     },
@@ -62,6 +65,7 @@ export class ProfileComponent implements OnInit {
             this._flashMessages.show(res.MSG , { cssClass: 'alert-success', timeout: 3000 });
             this._auth.getProfile().subscribe((data:any) => {
               this.user = data.user;
+              this._title.setTitle("Shoes Shop | " + this.user.username)
             },
             (error)=>{
               window.scrollTo(0, 0);

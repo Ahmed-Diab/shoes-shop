@@ -3,6 +3,7 @@ import { Subscription } from '../../../../node_modules/rxjs';
 import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
 import { Router } from '../../../../node_modules/@angular/router';
 import { ServicesService } from '../../services/services.service';
+import { Title } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +23,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private _route:Router,
     private _services:ServicesService,
-    private _flash_messages:FlashMessagesService
+    private _flash_messages:FlashMessagesService,
+    private _title:Title
     
   ) {  }
   ngOnInit() {
+    this._title.setTitle("Shoes Shop")
     window.scrollTo(0, 0);
     this.url = this._services.url;
     // get data from url

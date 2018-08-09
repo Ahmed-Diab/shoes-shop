@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap,  Router } from '@angular/router';
 import { ServicesService } from '../../services/services.service';
 import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
-import { product } from '../../modules/product';
 import { Subscription } from '../../../../node_modules/rxjs';
+import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
 
 
 @Component({
@@ -31,11 +31,15 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
     private activteRoute:ActivatedRoute,
     private _services:ServicesService,
     private _router:Router,
-    private _flashMessages:FlashMessagesService
+    private _flashMessages:FlashMessagesService,
+    private _title:Title,
+    private _meta:Meta
   ) { }
 
 
   ngOnInit() {
+    this._title.setTitle("Shoes Shop")
+
     window.scrollTo(0, 0);
     this.subscription = this._services.getShoes().subscribe((res:any)=>{
     if (res.success) {
@@ -44,6 +48,10 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
         let id = params.get('id');
         var product = this.getByid(this.data, id)
         this.products = product;
+        for (const item of product) {
+          this._title.setTitle(item.title);
+          this._meta.addTag({name:"description", content:item.dis})
+        }
       });
     }
     if (!res.success) {

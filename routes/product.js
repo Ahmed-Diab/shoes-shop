@@ -138,6 +138,7 @@ router.get('/:id/remove', (req, res, next)=>{
 
 // start edit product
 router.post('/:id/edit', (req, res, next)=>{     
+    var req_id = req.params.id;
     upload(req, res, (err) => {
         // if req.files
         var category = req.body.category,
@@ -150,10 +151,11 @@ router.post('/:id/edit', (req, res, next)=>{
         size_44    = parseInt(req.body.size_44),
         size_45    = parseInt(req.body.size_45),
         size_46    = parseInt(req.body.size_46);
+
         if(err)  {
             res.json({success:false, errMSG: err.message});
         }
-        if(req.files.length === 4){
+        if(req.files.length == 4){
             var req_images = [];
             for (const image of req.files) {
                 req_images.push(image.filename);
@@ -170,7 +172,7 @@ router.post('/:id/edit', (req, res, next)=>{
                     }
                   });
             }
-            Shoes.findById(req.params.id, (err, product)=>{
+            Shoes.findById(req_id, (err, product)=>{
                 if (err) {
                     res.json({success:false, errMSG:err.message})
                 }else{
@@ -185,7 +187,7 @@ router.post('/:id/edit', (req, res, next)=>{
                     } // end remove product images from src folder
                 }
             })
-        Shoes.findByIdAndUpdate(req.params.id, {
+        Shoes.findByIdAndUpdate(req_id, {
             category:category,
             price   :price,
             dis     :dis,
@@ -205,8 +207,9 @@ router.post('/:id/edit', (req, res, next)=>{
             }
         })// end save new schema to mongose
     }
-    if (req.files.length === 0){
-        Shoes.findByIdAndUpdate(req.params.id, {
+    if (req.files.length == 0){
+
+        Shoes.findByIdAndUpdate(req_id, {
             category:category,
             price   :price,
             dis     :dis,
@@ -219,14 +222,17 @@ router.post('/:id/edit', (req, res, next)=>{
             size_46 :size_46,
         }, (err)=>{
             if (err) {
-                res.json({success:false, errMSG: err.message});
+                res.json({success:false, errMSG: err});
             }else{
                 res.json({success:true, MSG: 'saved'});
             }
         })// end save new schema to mongose
     }
-    if (req.files.length > 4 || req.files.length < 4){
-        res.json({success:false, errMSG: 'you must select 4 images not more not less'});
+    if (req.files.length > 4){
+        res.json({success:false, errMSG: 'you must select 4 images not more'});
+    } if (req.files.length < 4 && req.files.length > 1) {
+        res.json({success:false, errMSG: 'you must select 4 images  not less'});
+
     }
     })
 }) // end edit product
