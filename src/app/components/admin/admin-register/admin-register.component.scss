@@ -16,58 +16,18 @@
 
 }
 .row{
-    @extend %input_style;
+  @extend %input_style;
     label{
         font-weight: bold;
         font-size: 18px;
         color: $font_dark;
     }
-    form{
-      padding: 25px;
-      box-shadow: 0 0 10px $color_4;
-      border-radius: 5px;
-  
-     input{
-          width: 100%;
-          padding: 1em;
-          border: none;
-          border-bottom: solid $color_3 2px;
-          background-color: transparent;
-          color:$color_4 !important;
-          border-radius: 0;
-  
-          &::placeholder{
-              color:$color_3;
-              transition: all ease .3s;
-  
-          }
-          &:focus{
-            outline: none !important;
-            box-shadow: 0 0 0;
-            &::placeholder{
-              transform: scale(.8)
-          }
-        }
-      }
-      button {
-          text-transform: capitalize;
-          width: 100%;
-          cursor: pointer;
-          color: $font_dark;
-          font-weight: 700;
-          letter-spacing: 2px;
-          background-color: $color_3;
-          &:hover{
-              background-color: $color_4;
-              color: $font_light;
-  
-          }
-      }
-  }
+    form{   
+     @extend %form;
+    }
 }
   
 #user_image{
-
   opacity: 0;
   position: relative;
   top: -100px;

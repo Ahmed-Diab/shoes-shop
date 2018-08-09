@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Productes = require('../modules/product');
 
+// start get cart
 router.get('/', (req, res, next)=>{
     var cart = req.session.cart;
     var desplay_cart = {items: [], total: 0, totalQut:0};
@@ -19,12 +20,9 @@ router.get('/', (req, res, next)=>{
     desplay_cart.totalQut = totalQut
     desplay_cart.total = total;
     res.json({cart: desplay_cart});
-});
+});// end get cart
 
-
-
-
-
+// set cart
 router.get('/:id/:size', (req, res, next)=>{
     var productID = req.params.id
     var productSize = req.params.size
@@ -105,10 +103,9 @@ router.get('/:id/:size', (req, res, next)=>{
         }
     } 
 })
-});
+});//end set cart
 
-
-
+// start minus cart
 router.get('/minus/:id/cart', (req, res, next)=>{
     var minusID = req.params.id
     req.session.cart = req.session.cart || [];
@@ -141,20 +138,24 @@ router.get('/minus/:id/cart', (req, res, next)=>{
             desplay_cart.total = total;
             res.json({cart: desplay_cart});
         }
-})
-///////start plus qut
+})// end minus cart qut
+
+///////start plus cart qut
 router.get('/plus/:id/:size/cart', (req, res, next)=>{
     var productID = req.params.id
     var productSize = req.params.size
     req.session.cart = req.session.cart || [];
     var cart = req.session.cart;
+    
     Productes.findById(productID.slice(0, 24), (err, product)=>{
+
         if (err) {
             console.log(err)
         }else{
     var item = cart.find((o)=>{return o.id === productID});
     if (item) {
         if(item.size === productSize){
+            var msg;
             if (productSize === "41") {
                 if (item.qut < product.size_41) {
                     item.qut+=1;
@@ -207,12 +208,13 @@ router.get('/plus/:id/:size/cart', (req, res, next)=>{
             desplay_cart.totalQut = totalQut
             desplay_cart.total = total;
             res.json({cart: desplay_cart});
-          } 
-          
+          }   
     }
 } 
 })
-})// end plus qut
+})// end plus cart qut
+
+// remove car qut
 router.get('/remove/:id/remove', (req, res, next)=>{
     var productID = req.params.id
     req.session.cart = req.session.cart || [];
@@ -230,7 +232,6 @@ router.get('/remove/:id/remove', (req, res, next)=>{
       for(item in cart){
           desplay_cart.items.push(cart[item]);
           let qut = cart[item].qut;
-          //to return total price in jade cart.total
           total += (cart[item].qut * cart[item].price)
           itemsQut.push(qut);
       }
@@ -238,6 +239,6 @@ router.get('/remove/:id/remove', (req, res, next)=>{
       desplay_cart.totalQut = totalQut
       desplay_cart.total = total;
       res.json({cart: desplay_cart}); 
-})
-// start to get param by id
+})//end remove car qut
+
 module.exports = router;

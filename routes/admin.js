@@ -113,8 +113,40 @@ router.get('/users', (req, res, next)=>{
       if(err)  {
         console.log(err)
         return  res.json({success:false, errMSG: err.message});
-      } else{
-        if (req.file.filename){
+      }
+    Users.findOne({"username":req.body.username}, (err, user)=>{
+      if (err) {
+        res.json({success:false, errMSG: err.message})
+      }
+      if (user) {
+        if(req.file){
+          Users.findByIdAndUpdate(req.params.id, 
+            {
+              image:req.file.filename
+            }, 
+            (err, user)=>{
+            if (err) {
+              res.json({success:false, errMSG: err.message})
+            }else{
+              fs.unlink('./public/users-images/'+user.image, (err) => {
+                if (err) throw err;
+                });
+                res.json({success:true, MSG: "this username is alredy taken"})
+            }
+          })
+      }
+      if(!req.file){
+        Users.findById(req.params.id, (err, user)=>{
+          if (err) {
+            res.json({success:false, errMSG: err.message})
+          }else{
+              res.json({success:true, MSG: "this username is alredy taken"})
+          }
+        })
+    }
+    }
+      if (!user) {
+        if(req.file){
           Users.findByIdAndUpdate(req.params.id, 
             {
               username:req.body.username,
@@ -127,11 +159,11 @@ router.get('/users', (req, res, next)=>{
               fs.unlink('./public/users-images/'+user.image, (err) => {
                 if (err) throw err;
                 });
-                 res.json({success:true, MSG:'saved'})
+                  res.json({success:true, MSG:'saved'})
             }
           })
         }
-        if(!req.file.filename){
+        if(!req.file){
           Users.findByIdAndUpdate(req.params.id, 
             {
               username:req.body.username
@@ -145,7 +177,9 @@ router.get('/users', (req, res, next)=>{
           })
         }
       }
-    })   
+    })
+
+  })   
 })  // end edit user
 
 
@@ -181,7 +215,7 @@ router.get('/:id/block', (req, res, next)=>{
     if(err){
       res.json({success:false, errMSG:err.message});
     }else{
-        res.json({success:true, user:user});
+        res.json({success:true, MSG:"blocked"});
     }
   })
 });// end get user by id
@@ -192,7 +226,7 @@ router.get('/:id/unblock', (req, res, next)=>{
     if(err){
       res.json({success:false, errMSG:err.message});
     }else{
-        res.json({success:true, user:user});
+        res.json({success:true, MSG:"unblocked"});
     }
   })
 });// end get user by id

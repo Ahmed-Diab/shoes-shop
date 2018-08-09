@@ -36,7 +36,7 @@ const routes: Routes = [
     {path:'edit', component:EditProductComponent},
     {path:'users', component:UsersComponent},
     {path:'messages', component:MessegesComponent},
-    {path:'admin/register', component:AdminRegisterComponent},
+    {path:'register', component:AdminRegisterComponent},
   ]},
 
   

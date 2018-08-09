@@ -2,14 +2,11 @@
 <app-spinner *ngIf="spinner"></app-spinner>
 <flash-messages></flash-messages>
 <div class="row">
-  <div *ngIf="data.length > 0;" class="col-12 col-md-7 offset-md-5">
-    <form (submit)='storBy()'>
+  <div class="col-12 col-md-7 offset-md-5">
       <div class="row">
         <div class="col-12 col-md-9">
           <div class="form-group">
             <select [(ngModel)]="stro"  class="form-control input" name="stor" id="stor">
-              <option value="from new to old">from new to old</option>
-              <option value="from old to new" selected>from old to new</option>
               <option value="price low to height">price low to height</option>
               <option value="price height to low">price height to low</option>
               <option value="from A to Z">from A to Z</option>
@@ -18,17 +15,28 @@
           </div>
         </div>
         <div class="col-12 col-md-3">
-          <button type="submit" class="btn-sm btn">sort</button>
+          <button type="button" (click)='storBy(stro)' class="btn-sm btn">sort</button>
         </div>
       </div>
-    </form>
   </div>
 
 </div>
-<ng-container *ngIf="data.length > 0; else elseTemplate">
-  <div class="row justify-content-around">
-    <div class="col-6 col-md-3 col-xl-2 pt-4 " *ngFor="let product of data | paginate: { itemsPerPage: 24, currentPage: p }">
-      <div class="card position-relative">
+<ng-container *ngIf="data; else elseTemplate">
+  <div class="row justify-content-around pt-2">
+    <div class="col-6 col-lg-4 mt-4" *ngFor="let product of data | paginate: { itemsPerPage: 24, currentPage: p }">
+        <div class="row border border-info p-2">
+            <div class="col-12 col-lg-6">
+              <img class="img-fluid" src='{{url}}/images/{{product.images[0]}}'  [alt]=product.title>
+            </div>
+            <div class="col-12 col-lg-6 pl-0 pr-0">
+              <h6>{{product.title | titlecase}}</h6>
+              <h6>price :<span class="float-right">{{product.price | currency:'$ '}}</span></h6>
+              <div class="text-center">
+                <button class="btn text-capitalize w-100 mt-2" (click)='ViewProduct(product._id)'>view details</button>
+              </div>
+            </div>
+          </div>
+      <!-- <div class="card position-relative">
           <div class="sold position-absolute" *ngIf="product.qut == 0">
             <h4 class="position-relative">sold</h4>
           </div>
@@ -37,9 +45,9 @@
         <img  class="img-fluid" src='{{url}}/images/{{product.images[0]}}'  [alt]=product.title>
       </div>
       <div class="card-body pr-0 pl-0 pb-0">
-        <h6 class="card-title p-0 text-capitalize"> title : <span class="float-right">{{product.title | titlecase}}</span></h6> 
-        <h6 class="card-title p-0 text-capitalize"> price :<span class="float-right">{{product.price | currency:'$ '}}</span></h6> 
-     </div>
+        <p class="card-title p-0 text-capitalize"> title : <span class="float-right">{{product.title | titlecase}}</span></p> 
+        <p class="card-title p-0 text-capitalize"> price :<span class="float-right">{{product.price | currency:'$ '}}</span></p> 
+     </div> -->
     </div>
     <!-- start pagination-controls -->
       <!-- end pagination-controls -->

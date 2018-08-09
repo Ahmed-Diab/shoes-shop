@@ -15,6 +15,12 @@ i{
     }
     .btn{
         @extend %input_btn;
+
+    }
+    .remove-btn{
+        &:hover {
+            background-color: $color_3 !important;
+        }
     }
 }
 @media(max-width:578px){

@@ -4,8 +4,13 @@
 .card{
     overflow: hidden;
     border: none;
+
 }
 
+.card-img-top{
+    cursor: pointer;
+
+}
 select{
     border: 1px solid $color_1 !important;
 }

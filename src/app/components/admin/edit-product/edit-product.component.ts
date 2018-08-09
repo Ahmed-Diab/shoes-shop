@@ -16,7 +16,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
   value:string = '';
   subscription:Subscription;
   imagesURL:any = [];
-  newdis:any = 'hello' ;
   title:string;
   category:string = 'men';
   price:string;
@@ -33,11 +32,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
   size_45:string;
   size_46:string;
   id:string;
+  dis:any;
   url:string;
   constructor(
+    private element: ElementRef,
     private _http: HttpClient,
-    private el: ElementRef,
-    private _flash_messages:FlashMessagesService,
+    private _flashMessages:FlashMessagesService,
     private _valdete : ValidateService,
     private _services:ServicesService
   ) { }
@@ -50,18 +50,17 @@ export class EditProductComponent implements OnInit, OnDestroy {
         this.spinner = false;
       }
       if(!res.success){
-        this._flash_messages.show(res.errMSG , { cssClass: 'alert-danger', timeout: 20000 });
+        window.scrollTo(0, 0);
+        this._flashMessages.show(res.errMSG , { cssClass: 'alert-danger', timeout: 20000 });
       }
-    },
-    // if error 
+    }, 
     (error:any) =>{
-      this._flash_messages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 }),
+      window.scrollTo(0, 0);
+      this._flashMessages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 }),
       this.spinner = false
     });
 }
 ngOnDestroy(): void {
-  //Called once, before the instance is destroyed.
-  //Add 'implements OnDestroy' to the class.
   this.subscription.unsubscribe();
 }
 // remove product
@@ -91,9 +90,9 @@ onChange(file:any){
   }
 editProduct($event, product){
   var overlay = document.querySelector('.overlay');
-  overlay.classList.add('display');
-  this.newdis       = product.dis
-  // this.imagesURL = product.
+  document.body.style.overflow = 'hidden';
+  overlay.classList.add('displayOverlay');
+  this.dis       = product.dis
   this.title     = product.title;
   this.category  = product.category;
   this.price     = product.price;
@@ -104,12 +103,11 @@ editProduct($event, product){
   this.size_45   = product.size_45;
   this.size_46   = product.size_46;
   this.id        = product._id;
-  this.images    = product.images
+  this.images    = product.images;
 }
 
 uploadProduct(){
   var product = {
-    imagesURL    : this.imagesURL  ,
     title        : this.title      ,
     category     : this.category   ,
     price        : this.price      ,
@@ -119,23 +117,26 @@ uploadProduct(){
     size_44      : this.size_44    ,
     size_45      : this.size_45    ,
     size_46      : this.size_46    ,
+    dis          : this.dis
 }
-if (!this._valdete.validateAddProduact(product)) {
+if(product.title === undefined || product.category === undefined || product.price === undefined||product.size_41 === undefined || product.size_42 === undefined || product.size_43 === undefined || product.size_44 === undefined || product.size_45 === undefined || product.size_46 === undefined) {
   window.scrollTo(0, 0);
-  this._flash_messages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000})  
+  this._flashMessages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000});
 };
 // locate the file element meant for the file upload.
-      let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#images');
+      let inputEl: HTMLInputElement = this.element.nativeElement.querySelector('#images');
 //get the total amount of files attached to the file input.
       var fileCount: number = inputEl.files.length;
 //create a new fromdata instance
       let formData = new FormData();
       if(fileCount > 4){
-        this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+        window.scrollTo(0, 0);
+        this._flashMessages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:2000})  
         this.imagesURL = undefined
       }
-      if(fileCount < 4){
-        this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+      if(fileCount < 4 && fileCount > 1){
+        window.scrollTo(0, 0);
+        this._flashMessages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
         this.imagesURL = undefined
     
       }
@@ -146,7 +147,7 @@ for (var i = 0;  i < fileCount; i++) {
   }
 }
 formData.append('title',       this.title);
-formData.append('dis',         this.newdis);
+formData.append('dis',         this.dis);
 formData.append('category',    this.category);
 formData.append('price',       this.price);
 formData.append('size_41',     this.size_41);
@@ -158,37 +159,39 @@ formData.append('size_46',     this.size_46);
 // }
 this._http.post(`/product/${this.id}/edit`, formData).subscribe((res:any) => {
   if (res.success) {
-    this.subscription = this._services.getShoes().subscribe((res:any)=>{
+    this._services.getShoes().subscribe((res:any)=>{
       if (res.success) {
         this.data = res.data;
         this.spinner = false;
       }
       if(!res.success){
-        this._flash_messages.show(res.errMSG , { cssClass: 'alert-danger', timeout: 20000 });
+        window.scrollTo(0, 0);
+        this._flashMessages.show(res.errMSG , { cssClass: 'alert-danger', timeout: 20000 });
       }
     },
     // if error 
     (error:any) =>{
-      this._flash_messages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 }),
+      window.scrollTo(0, 0);
+      this._flashMessages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 }),
       this.spinner = false
     });
-
     var overlay = document.querySelector('.overlay');
-    overlay.classList.remove('display');
+    overlay.classList.remove('displayOverlay');
+    document.body.style.overflow = 'auto';
     window.scrollTo(0, 0);
-    this._flash_messages.show(res.MSG, {cssClass:'alert-success', timeout:3000})
+    this._flashMessages.show(res.MSG, {cssClass:'alert-success', timeout:3000})
     this.imagesURL = []
 
   }else{
     window.scrollTo(0, 0);
-    this._flash_messages.show(res.errMSG, {cssClass:'alert-danger', timeout:5000})   
+    this._flashMessages.show(res.errMSG, {cssClass:'alert-danger', timeout:5000})   
     this.imagesURL = []
 
   }
 },
 (err)=>{
   window.scrollTo(0, 0),
-  this._flash_messages.show(err.message , { cssClass: 'alert-danger', timeout: 20000 });
+  this._flashMessages.show(err.message , { cssClass: 'alert-danger', timeout: 20000 });
 });
 }
 }

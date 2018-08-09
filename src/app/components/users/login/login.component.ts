@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private _router: Router,
-    private flashMessage: FlashMessagesService,
-    private services:ServicesService
+    private _flashMessages: FlashMessagesService,
+    private _services:ServicesService
   ) {  }
 
   ngOnInit() {
@@ -54,11 +54,11 @@ export class LoginComponent implements OnInit {
     }
     if (this.username == undefined || this.password == undefined) {
       window.scrollTo(0, 0)
-      this.flashMessage.show('plz fill  all fields', {cssClass: 'alert-danger', timeout: 5000});
+      this._flashMessages.show('plz fill  all fields', {cssClass: 'alert-danger', timeout: 5000});
     }else{
       this._auth.loginUser(user).subscribe((data:any)=> {
         if(data.success) {
-          this.services.getCart().subscribe((res:any)=>{
+          this._services.getCart().subscribe((res:any)=>{
             this.cart = res.cart.items;
             if (this.cart.length >= 1) {
               this._auth.storeUserData(data.token, data.user);
@@ -73,13 +73,14 @@ export class LoginComponent implements OnInit {
           y.classList.add('animate')
           setTimeout(()=>{
             window.scrollTo(0, 0);
-            this.flashMessage.show(data.errMSG, {cssClass: 'alert-danger', timeout: 5000});
+            this._flashMessages.show(data.errMSG, {cssClass: 'alert-danger', timeout: 5000});
             y.classList.remove('animate')
           }, 1100);
         }
     },
-      (err)=>{
-        this.flashMessage.show(err.message, {cssClass: 'alert-danger', timeout: 10000});
+      (error)=>{
+        window.scrollTo(0, 0);
+        this._flashMessages.show(error.message, {cssClass: 'alert-danger', timeout: 10000});
       });
       }
     }

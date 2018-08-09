@@ -32,9 +32,9 @@ export class AddProductComponent implements OnInit {
 
 
   constructor(
+    private element: ElementRef,
     private _http: HttpClient,
-    private el: ElementRef,
-    private _flash_messages:FlashMessagesService,
+    private _flashMessages:FlashMessagesService,
     private _valdete : ValidateService,
     private _services:ServicesService
 
@@ -46,7 +46,7 @@ export class AddProductComponent implements OnInit {
 //  uplode form data
    upload() {
     // locate the file element meant for the file upload.
-    let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#images');
+    let inputEl: HTMLInputElement = this.element.nativeElement.querySelector('#images');
     //get the total amount of files attached to the file input.
             var fileCount: number = inputEl.files.length;
     //create a new fromdata instance
@@ -66,15 +66,17 @@ export class AddProductComponent implements OnInit {
   }
   if (!this._valdete.validateAddProduact(product)) {
     window.scrollTo(0, 0);
-    this._flash_messages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000})  
+    this._flashMessages.show('all fildes must be not empty', {cssClass:'alert-danger', timeout:5000})  
 
   }
   if(fileCount > 4){
-    this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+    window.scrollTo(0, 0 );
+    this._flashMessages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
     this.imagesURL = undefined
   }
   if(fileCount < 4){
-    this._flash_messages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
+    window.scrollTo(0, 0 );
+    this._flashMessages.show('images must be just for not more not less', {cssClass:'alert-danger', timeout:5000})  
     this.imagesURL = undefined
 
   }
@@ -96,14 +98,14 @@ export class AddProductComponent implements OnInit {
       this._http.post(`/product`, formData).subscribe((res:any) => {
         if (res.success) {
           window.scrollTo(0, 0);
-          this._flash_messages.show(res.MSG, {cssClass:'alert-success', timeout:3000})
+          this._flashMessages.show(res.MSG, {cssClass:'alert-success', timeout:3000})
         }else{
           window.scrollTo(0, 0);
-          this._flash_messages.show(res.errMSG, {cssClass:'alert-danger', timeout:5000})              }
+          this._flashMessages.show(res.errMSG, {cssClass:'alert-danger', timeout:5000})              }
       },
-      (err)=>{
+      (error)=>{
         window.scrollTo(0, 0),
-        this._flash_messages.show(err.message , { cssClass: 'alert-danger', timeout: 20000 });
+        this._flashMessages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 });
       });
       this.imagesURL = []
   }

@@ -27,7 +27,7 @@
         </td>
         <td scope="row">{{product.price  | currency: 'USD' }}</td>
         <td scope="row">{{product.price *  product.qut| currency: 'USD' }}</td>
-        <td scope="row"><button (click)='removeItemById(product.id)' class="btn ">remove</button></td>
+        <td scope="row"><button (click)='removeItemById(product.id)' class="btn remove-btn">remove</button></td>
       </tr>
     </tbody>
     <tbody>

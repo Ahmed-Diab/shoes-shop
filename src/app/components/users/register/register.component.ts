@@ -20,12 +20,12 @@ export class RegisterComponent implements OnInit {
   imagesURL: string = '../../../assets/images/default-user-image.png';
 
   constructor(
-    private validateService: ValidateService,
-    private authService: AuthService,
-    private router: Router,
-    private el: ElementRef,
+    private _validateService: ValidateService,
+    private _auth: AuthService,
+    private _router: Router,
+    private element: ElementRef,
     private _services:ServicesService,
-    private flashMessage: FlashMessagesService) { }
+    private _flashMessages: FlashMessagesService) { }
 
   ngOnInit() {
         window.scrollTo(0, 0);
@@ -53,24 +53,27 @@ export class RegisterComponent implements OnInit {
     }
 
     // Required Fields
-    if(!this.validateService.validateRegister(user)) {
+    if(!this._validateService.validateRegister(user)) {
+      window.scrollTo(0, 0);
       this.username = '';
       this.password = '';
       this.email = '';
-      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
+      this._flashMessages.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       window.scrollTo(0, 0);
       return false;
     }
 
     // Validate Email
-    if(!this.validateService.validateEmail(user.email)) {
-    this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 3000});
+    if(!this._validateService.validateEmail(user.email)) {
+      window.scrollTo(0, 0);
+    this._flashMessages.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 3000});
     window.scrollTo(0, 0);
       return false;
     }
 
     if (user.password != user.repassword) {
-      this.flashMessage.show('password fied must be the same repassword', {cssClass: 'alert-danger', timeout: 3000});
+      window.scrollTo(0, 0);
+      this._flashMessages.show('password fied must be the same repassword', {cssClass: 'alert-danger', timeout: 3000});
       this.password = '';
       this,this.repassword = '';
       window.scrollTo(0, 0);
@@ -78,11 +81,12 @@ export class RegisterComponent implements OnInit {
       
     }
  // locate the file element meant for the file upload.
- let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#user_image');
+ let inputEl: HTMLInputElement = this.element.nativeElement.querySelector('#user_image');
  //create a new fromdata instance
          let formData = new FormData();
          if (inputEl.files.length !== 1) {
-          this.flashMessage.show('PLZ select profile image', {cssClass: 'alert-danger', timeout: 3000});
+          window.scrollTo(0, 0);
+          this._flashMessages.show('PLZ select profile image', {cssClass: 'alert-danger', timeout: 3000});
           window.scrollTo(0, 0);
           return false;
          }
@@ -94,19 +98,21 @@ export class RegisterComponent implements OnInit {
   formData.append('email', this.email)
 
 
-    this.authService.registerUser(formData).subscribe((data:any) => {
+    this._auth.registerUser(formData).subscribe((data:any) => {
     if(data.success) {
-      this.router.navigate(['/login']);
-      
+      this._router.navigate(['/login']);
     } else {
-      this.flashMessage.show(data.errMSG, {cssClass: 'alert-danger', timeout: 10000});
-      this.router.navigate(['/register']);
+      window.scrollTo(0, 0);
+      this._flashMessages.show(data.errMSG, {cssClass: 'alert-danger', timeout: 10000});
+      this._router.navigate(['/register']);
       window.scrollTo(0, 0);
     }
-  },(err)=>{
-    this.flashMessage.show(err.message, {cssClass: 'alert-danger', timeout: 10000});
-  }
-);
+  },
+  (error)=>{
+    window.scrollTo(0, 0);
+    this._flashMessages.show(error.message, {cssClass: 'alert-danger', timeout: 10000});
+  });
+  
 } // end on registre submit
 
 }

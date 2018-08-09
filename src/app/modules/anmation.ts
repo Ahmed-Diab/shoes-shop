@@ -7,7 +7,7 @@ export function query(s, a) {
 export const routerTransition = trigger('routeAnimation', [
     transition('home => *', [
       style({height:'!'}),
-      query(':enter', style({transform:'translateX(-100%'})),
+      query(':enter', style({transform:'translateX(-100%)'})),
       query(':enter, :leave', style({position:'absolute', top:'10px', left:0, right:0})),
       group([
         query(':leave', [animate('.3s cubic-bezier(.35, .0, .25, 1)', style({transform:'translateX(100%)'}))]),

@@ -1,76 +1,140 @@
-<nav class="navbar  d-xl-none navbar-expand-md navbar-light bg-light ">
-  <div class="container">
+<nav class="navbar  d-xl-none navbar-expand-md navbar-light bg-light pt-4 pb-4 ">
+
       <a class="navbar-brand"  [routerLink]="[ '/home' ]" >Shoes Shop</a>
   <button class="navbar-toggler hidden-lg-up" (click)="to()">
     <span class="fa fa-home "></span>
   </button>
   <div class="collapse navbar-collapse" id="small-nav">
-    <ul class="navbar-nav text-center ml-auto mt-2 mt-lg-0 ">
-        <li class="nav-item" *ngIf="_admin.AdminLoggedIn">
-            <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/admin' ]"  routerLinkActive="active" >admin</a>
-          </li>
+    <ul class="navbar-nav pl-4 ml-auto mt-2 mt-lg-0 ">
+          <li class="nav-item" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize" (click)="to()"
+              [routerLink]="['/admin/add']"
+                routerLinkActive="active"><i class="fa fa-upload"></i> add new product </a>
+            </li>
+            <li class="nav-item" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize" (click)="to()"
+              [routerLink]="['/admin/edit']" 
+              routerLinkActive="active"><i class="fa fa-cog"></i> edit products</a>
+            </li>
+            <li class="nav-item" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize" (click)="to()"
+              [routerLink]="['/admin/users']"
+                routerLinkActive="active"><i class="fa fa-cog"></i> users </a>
+            </li>
+            <li class="nav-item" *ngIf="_admin.AdminLoggedIn()">
+                
+              <a class="nav-link text-capitalize" (click)="to()"
+              [routerLink]="['/admin/messages']"
+                routerLinkActive="active"><i class="fa fa-cog"></i> messages </a>
+            </li>
+            <li class="nav-item" *ngIf="_admin.AdminLoggedIn()">
+                
+                <a class="nav-link text-capitalize" (click)="to()"
+                [routerLink]="['/admin/register']"
+                  routerLinkActive="active"><i class="fa fa-cog"></i> add new admin </a>
+              </li>
       <li class="nav-item">
         <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"  *ngIf="!_admin.AdminLoggedIn()">
         <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
       </li>
-      <li class="nav-item" *ngIf="!_auth.loggedIn()">
-        <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
-      </li>
-      <li class="nav-item" *ngIf="!_auth.loggedIn()">
-        <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
-      </li>
+      <li class="nav-item" *ngIf="!_auth.loggedIn() && !_admin.AdminLoggedIn()">
+          <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
+        </li>
+        <li class="nav-item" *ngIf="!_auth.loggedIn() && !_admin.AdminLoggedIn()">
+          <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
+        </li>
       <li class="nav-item" *ngIf="_auth.loggedIn()">
-          <a class="nav-link" (click)="to()" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
+          <a class="nav-link text-capitalize" (click)="to()" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
       </li>
       <li *ngIf="_auth.loggedIn()">
-          <a class="nav-link" (click)="to()" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
+          <a class="nav-link text-capitalize" (click)="to()" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
       </li>
-      <li class="nav-item" *ngIf="qut">
-        <a class="nav-link" (click)="to()" [routerLink]="['/cart']" routerLinkActive="active"> 
+      <!-- <li class="nav-item" *ngIf="qut">
+        <a class="nav-link text-capitalize" (click)="to()" [routerLink]="['/cart']" routerLinkActive="active"> 
           <i class="fa fa-shopping-basket"></i>
           <span>{{qut}}</span>
         </a>
-      </li>
+      </li> -->
+      <li *ngIf="_admin.AdminLoggedIn()">
+        <a class="nav-link text-capitalize" (click)="to()" [routerLink]="['/admin/login']" (click)='onAdminLogout()' routerLinkActive="active" >logout</a>
+    </li>
     </ul>
   </div>
-
-</div>
 </nav>
 
 
-<nav class="navbar d-none d-xl-block text-center   vh">
-  <a class="navbar-brand text-center mt-3" [routerLink]="[ '/home' ]" >Shoes Shop</a>
-  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    <li class="nav-item" *ngIf="_admin.AdminLoggedIn">
-      <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/admin' ]"  routerLinkActive="active" >admin</a>
+<nav class="navbar d-none d-xl-block vh">
+  <a class="navbar-brand  mt-3" [routerLink]="[ '/home' ]" >Shoes Shop</a>
+  <ul class="navbar-nav mr-auto mt-2 pl-4 mt-lg-0">
+<li class="nav-item" *ngIf="_admin.AdminLoggedIn()">
+    <button class="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#admin-nav" aria-controls="admin-nav"
+    aria-expanded="false" aria-label="Toggle navigation">
+        <li class="nav-item">
+          <span class="fa fa-user cru"></span> admin
+        </li>
+      </button>
+      <div class="collapse navbar-collapse" id="admin-nav">
+            <li class="nav-item pl-4" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize" 
+              [routerLink]="['/admin/add']"
+                routerLinkActive="active"><i class="fa fa-upload"></i> add new product </a>
+            </li>
+            <li class="nav-item pl-4" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize"
+              [routerLink]="['/admin/edit']" 
+              routerLinkActive="active"> <i class="fa fa-cog"></i> edit products</a>
+            </li>
+            <li class="nav-item pl-4" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize" 
+              [routerLink]="['/admin/users']"
+                routerLinkActive="active"> <i class="fa fa-cog"></i> users </a>
+            </li>
+            <li class="nav-item pl-4" *ngIf="_admin.AdminLoggedIn()">
+              <a class="nav-link text-capitalize" 
+              [routerLink]="['/admin/messages']"
+                routerLinkActive="active"><i class="fa fa-cog"></i> messages </a>
+            </li>
+            <li class="nav-item pl-4" *ngIf="_admin.AdminLoggedIn()">
+                <a class="nav-link text-capitalize" 
+                [routerLink]="['/admin/register']"
+                  routerLinkActive="active"><i class="fa fa-cog"></i> add new admin </a>
+            </li>
+        </div>
+</li>
+    <li class="nav-item" *ngIf="!_admin.AdminLoggedIn()">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/home' ]"  routerLinkActive="active" >home</a>
+    <li class="nav-item" *ngIf="!_admin.AdminLoggedIn()">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/contact' ]" routerLinkActive="active" >contact</a>
+    <li class="nav-item" *ngIf="!_auth.loggedIn() && !_admin.AdminLoggedIn()">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
     </li>
-    <li class="nav-item" *ngIf="!_auth.loggedIn()">
-      <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/login' ]" routerLinkActive="active" >login</a>
-    </li>
-    <li class="nav-item" *ngIf="!_auth.loggedIn()">
-      <a class="nav-link text-capitalize" (click)="to()" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
+    <li class="nav-item" *ngIf="!_auth.loggedIn() && !_admin.AdminLoggedIn()">
+      <a class="nav-link text-capitalize" [routerLink]="[ '/register' ]" routerLinkActive="active" >register</a>
     </li>
     <li class="nav-item" *ngIf="_auth.loggedIn()">
-        <a class="nav-link" (click)="to()" [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
+        <a class="nav-link"  [routerLink]="['/profile']" routerLinkActive="active" >profile</a>
     </li>
-    <li *ngIf="_auth.loggedIn()">
-        <a class="nav-link" (click)="to()" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
+    <li *ngIf="_auth.loggedIn() ||  _admin.AdminLoggedIn()">
+        <a class="nav-link" [routerLink]="['/login']" (click)='onLogoutClick()' routerLinkActive="active" >logout</a>
     </li>
     <li class="nav-item" *ngIf="qut">
-      <a class="nav-link" (click)="to()" [routerLink]="['/cart']" routerLinkActive="active"> 
+      <a class="nav-link" [routerLink]="['/cart']" routerLinkActive="active"> 
         <i class="fa fa-shopping-basket"></i>
         <span>{{qut}}</span>
       </a>
     </li>
+
   </ul>
 </nav>
 
+<span *ngIf="seeCart && qut" class="position-absolute cart-icon">
+  <a class="border border-danger" [routerLink]="['/cart']" routerLinkActive="active"> 
+    <i class="fa fa-shopping-basket"></i>
+    <span> {{qut}}</span>
+  </a>
+</span>
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 import { throwError, BehaviorSubject, Observable } from '../../../node_modules/rxjs';
 import { catchError } from 'rxjs/operators';
+import { Router } from '../../../node_modules/@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,40 +12,46 @@ export class ServicesService {
   
   // to make share data in all componant
   private dataSrc = new BehaviorSubject<number>(0);
-  private dataAdmin = new BehaviorSubject<boolean>(false);
-
   crentData = this.dataSrc.asObservable();
-  crentAdmin = this.dataAdmin.asObservable();
   constructor(
-    private http:HttpClient,
+    private _http:HttpClient,
+    private _router:Router
   ) { }
     // to change data sharing
     changeData(num){
       this.dataSrc.next(num)
     }
-    changeAdmin(success){
-      this.dataAdmin.next(success)
-    }
-
 
   getShoes(){
-    return this.http.get(`${this.url}/product`).pipe( catchError(this.handleError));
+    return this._http.get(`${this.url}/product`).pipe( catchError(this.handleError));
   }
   // cart 
   getCart(){
-    return this.http.get(`${this.url}/cart`).pipe( catchError(this.handleError));
+    return this._http.get(`${this.url}/cart`).pipe( catchError(this.handleError));
   }
   minusCart(id){
-    return this.http.get(`${this.url}/cart/minus/${id}/cart`).pipe( catchError(this.handleError));
+    return this._http.get(`${this.url}/cart/minus/${id}/cart`).pipe( catchError(this.handleError));
   }
   plusCart(id, size){
-    return this.http.get(`${this.url}/cart/plus/${id}/${size}/cart`).pipe( catchError(this.handleError));
+    return this._http.get(`${this.url}/cart/plus/${id}/${size}/cart`).pipe( catchError(this.handleError));
   }
   getCartById(id, size){
-    return this.http.get(`${this.url}/cart/${id}/${size}`).pipe( catchError(this.handleError));
+    return this._http.get(`${this.url}/cart/${id}/${size}`).pipe( catchError(this.handleError));
   }
   removeCart(id){
-    return this.http.get(`${this.url}/cart/remove/${id}/remove`).pipe( catchError(this.handleError));
+    return this._http.get(`${this.url}/cart/remove/${id}/remove`).pipe( catchError(this.handleError));
+  }
+
+  getMessages(){
+    return this._http.get(`${this.url}/message`).pipe( catchError(this.handleError))
+  }
+
+  postMessages(message){
+    return this._http.post(`${this.url}/message`, message).pipe( catchError(this.handleError))
+  }
+
+  removeMessages(id){
+    return this._http.get(`${this.url}/message/${id}/remove`).pipe( catchError(this.handleError))
   }
 
   handleError(error: HttpErrorResponse) {
@@ -61,15 +68,4 @@ export class ServicesService {
     return throwError(error);
   };
   
-  storFromHeight(arr, p){
-    return  arr.slice(0).sort((a, b)=> {
-          return (a[p] < b[p]) ? 1 : (a[p] < b[p]) ? -1 : 0;
-        });
-    }
-    
-  storFromlow(arr, p){
-    return  arr.slice(0).sort((a, b)=> {
-          return (a[p] > b[p]) ? 1 : (a[p] > b[p]) ? -1 : 0;
-        });
-    }
 }

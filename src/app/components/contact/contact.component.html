@@ -1,4 +1,6 @@
 
+  <flash-messages></flash-messages>
+
         <h2 class="pt-2 pb-2 text-capitalize text-left">contact :</h2>
         <div class="wrapper animated bounceInLeft m-3  p-2">
           <div class="contact-info d-none d-md-block">
@@ -26,7 +28,7 @@
             <h3>Email Us</h3>
             <form (submit)='sendMessage()'>
               <p>
-                <input [(ngModel)]="name" autocomplete="off" type="text" name="name" placeholder="Name">
+                <input [(ngModel)]="username" autocomplete="off" type="text" name="username" placeholder="Name">
               </p>
               <p>
                 <input  [(ngModel)]="email" type="email" name="email" placeholder="Email" autocomplete="off">

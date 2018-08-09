@@ -10,7 +10,7 @@ export class AdminService {
 
   constructor(
     private _service:ServicesService,
-    private http:HttpClient,
+    private _http:HttpClient,
   ) { 
     this.isDev = true;
   }
@@ -26,39 +26,38 @@ export class AdminService {
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authToken);
-      return this.http.post(`${this._url}/admin/login`, admin).pipe(
+      return this._http.post(`${this._url}/admin/login`, admin).pipe(
         catchError(this._service.handleError)
       );
     }
   }
 
   registerAdmin(newAdmin) {
-    return this.http.post<any>( `${this._url}/admin/register`, newAdmin).pipe(
+    return this._http.post<any>( `${this._url}/admin/register`, newAdmin).pipe(
       catchError(this._service.handleError)
     )
   }
   getAllUsers() {
-    return this.http.get( `${this._url}/admin/users`).pipe(
+    return this._http.get( `${this._url}/admin/users`).pipe(
       catchError(this._service.handleError)
     )
   }
 
   editUser(userData:any, id:any) {
-    return this.http.post<any>( `${this._url}/admin/${id}/edit`, userData).pipe(
+    return this._http.post<any>( `${this._url}/admin/${id}/edit`, userData).pipe(
       catchError(this._service.handleError)
     )
   }
-  
   removeUser(id) {
-    return this.http.get<any>( `${this._url}/admin/${id}/remove`).pipe(
+    return this._http.get<any>( `${this._url}/admin/${id}/remove`).pipe(
       catchError(this._service.handleError)
     )
   }
   blockUser(id){
-    return this.http.get(`/admin/${id}/block`)
+    return this._http.get(`/admin/${id}/block`)
   }
   unblockUser(id){
-    return this.http.get(`/admin/${id}/unblock`)
+    return this._http.get(`/admin/${id}/unblock`)
   }
 
   storeAdminData(token) {

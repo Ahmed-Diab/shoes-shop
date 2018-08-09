@@ -30,7 +30,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
   constructor(
     private activteRoute:ActivatedRoute,
     private _services:ServicesService,
-    private router:Router,
+    private _router:Router,
     private _flashMessages:FlashMessagesService
   ) { }
 
@@ -49,6 +49,10 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
     if (!res.success) {
       this.errorMessage = res.errMSG
     }
+  },
+  (error:any) =>{
+    window.scrollTo(0, 0);
+    this._flashMessages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 })
   });
   } // end ngOnInit
 
@@ -67,7 +71,7 @@ changeImg(image){
 
 // go back function
 goBack(){
-  return this.router.navigate([`/home`]);
+  return this._router.navigate([`/home`]);
 }
  
 addToSession(product){
@@ -82,6 +86,9 @@ addToSession(product){
       this._services.changeData(this.itemsLength);
       window.scrollTo(0, 0)
       this._flashMessages.show('saved', { cssClass: 'alert-success', timeout: 1000 });
+    },
+    (error:any) =>{
+      this._flashMessages.show(error.message , { cssClass: 'alert-danger', timeout: 20000 })
     });
   }
 }

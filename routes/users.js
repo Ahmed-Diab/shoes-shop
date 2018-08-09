@@ -27,7 +27,6 @@ const upload = multer({
    }
 }).single('user_image') // end handel multer file size and use check file type fun
 
-
 // start check file type 
 function checkFileType(file, cb) {
   const filetypes = /jpeg|jpg|png|gif/;
@@ -39,24 +38,8 @@ function checkFileType(file, cb) {
     cb('Error: must be image');
   }
 } // end check file type 
-// to varfay user
-function verifyToken(req, res, next) {
-  if(!req.headers.authorization) {
-    return res.status(401).send('Unauthorized request')
-  }
-  let token = req.headers.authorization.split(' ')[1]
-  if(token === 'null') {
-    return res.status(401).send('Unauthorized request')    
-  }
-  let payload = jwt.verify(token, 'secretKey')
-  if(!payload) {
-    return res.status(401).send('Unauthorized request')    
-  }
-  req.userId = payload.subject
-  next()
-}
 
-
+// start lo in
 router.post('/login', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -98,9 +81,10 @@ router.post('/login', (req, res, next) => {
         }
 
       }); // end User.getUserByUsername
-  }); 
+  }); // end log in
 
-// registry  
+
+// start registry  
 router.post('/register', (req, res, next)=>{
   upload(req, res, (err) => {
     if(err)  {
@@ -136,7 +120,7 @@ router.post('/register', (req, res, next)=>{
       
       }
     });
-  })// end user post
+  })// end register
 
 
 // profile

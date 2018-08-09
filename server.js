@@ -28,6 +28,7 @@ const product = require('./routes/product');
 const users = require('./routes/users');
 const cart = require('./routes/cart');
 const admin = require('./routes/admin');
+const message = require('./routes/messages');
 
 
 app.use(cookieParser())
@@ -56,6 +57,7 @@ app.use('/product', product)
 app.use('/users', users)
 app.use('/cart', cart)
 app.use('/admin', admin)
+app.use('/message', message)
 
 // Index Route
 app.get('/', (req, res) => {

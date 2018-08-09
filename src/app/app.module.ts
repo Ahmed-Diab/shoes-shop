@@ -47,8 +47,7 @@ import { AdminService } from './services/admin.service';
     AuthService, 
     AuthGuard, 
     AdminGuard, 
-    AdminService
-  
+    AdminService  
   ],
   bootstrap: [AppComponent]
 })

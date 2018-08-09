@@ -1,3 +1,11 @@
-<p>
-  messeges works!
-</p>
+<div class="row">
+    <flash-messages></flash-messages>
+
+  <div class="col-12" *ngFor="let message of messages">
+    <div class="shadow p-3 mb-5 bg-white rounded">
+        <h4>name : {{message.username}}</h4>
+        <h6>email : {{message.email}}</h6>
+        <p>message : <br>{{message.message}}</p>
+    </div>
+  </div>
+</div>

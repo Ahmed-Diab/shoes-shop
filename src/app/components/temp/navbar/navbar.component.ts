@@ -12,7 +12,7 @@ import { AdminService } from '../../../services/admin.service';
 })
 export class NavbarComponent implements OnInit {
   qut : any = [];
-  showen : any;
+  seeCart : boolean = true;
   admin:boolean = false;
   constructor(
     private _services:ServicesService,
@@ -23,8 +23,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this._services.crentData.subscribe((data:number) =>{this.qut = data})
-    this._services.crentAdmin.subscribe((res:any) => {this.admin = res})
-
     let items:any = [];
     this._services.getCart().subscribe((res:any)=>{
       items = res.cart;
@@ -32,17 +30,41 @@ export class NavbarComponent implements OnInit {
       this._services.changeData(items.items.length);
 
     })
+
+    window.addEventListener('resize', ()=>{
+      if (window.innerWidth >= 1198) {
+        this.seeCart = false;
+        
+      }else{
+        this.seeCart = true;
+      }
+    });
+
+    if (window.innerWidth >= 1198) {
+      this.seeCart = false;
+      
+    }else{
+      this.seeCart = true;
+    }
     
   }
 
   onLogoutClick() {
     this._auth.logout();
     this._router.navigate(['/login']);
-    this._services.changeAdmin(false);
+    return false;
+  }
+  onAdminLogout() {
+    this._admin.logout();
+    this._router.navigate(['/admin/login']);
     return false;
   }
   to(){
     var s = document.querySelector('#small-nav');
+    s.classList.toggle('collapse')
+  }
+  adminList(){
+    var s = document.querySelector('#admin-nav');
     s.classList.toggle('collapse')
   }
 }

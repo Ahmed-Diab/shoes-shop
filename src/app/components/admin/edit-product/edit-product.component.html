@@ -12,7 +12,7 @@
 <!-- start view data --> 
 <ng-container *ngIf="data.length > 0; else elseTemplate">
   <div class="row justify-content-around">
-    <div class="col-sm-3 mt-4" *ngFor="let product of data">
+    <div class="col-sm-3 mt-4 border border-info" *ngFor="let product of data">
       <div class="card position-relative">
         <img  class="img-fluid" title="{{product.title}}" src='{{url}}/images/{{product.images[0]}}'  [alt]=product.title>
       </div>
@@ -28,109 +28,108 @@
 </ng-template>
       </div> 
 
+
 <div class="overlay">
-  <div id="sample">
-    <div class="row">
-    <!-- start  form -->
-        <div class="col-12">
-            <flash-messages></flash-messages>
-            <form class="form-signin text-capitalize font-weight-bold">
-            <h3>old images</h3>
-                <div class="row">
-                        <div class="col-3 mt-2" *ngFor="let image of images">
-                            <div class="card position-relative">
-                                <img  class="card-img-top" src='/images/{{image}}' [alt]=image>
-                            </div>
-                        </div>
-                        <h3 *ngIf="imagesURL.length > 0">new images</h3>
-                        <div class="col-12">
-                                <div class="row">
-                                    <div class="col-3 img-fluid pr-0 pt-2 pb-1" *ngFor="let image of imagesURL; let name of selectUpload;">
-                                        <figure>
-                                            <img style="width: 100%;" class="img-fluid" id="uplode_image" [src]="image" alt="">	
-                                            <figcaption style="max-width: 300px"></figcaption>
-                                        </figure>
-                                    </div>
-                                <div class="col-12">
-                                    <div class="form-group position-relative">
-                                            <span class="image_span position-absolute text-center" >select image</span>
-                                        <input id="images" name="images" multiple type="file" (change)='onChange($event.target.files)' /> 
-                                    </div>
+    <div id="sample">
+        <div class="row">
+        <!-- start  form -->
+            <div class="col-12">
+                <form class="form-signin text-capitalize font-weight-bold">
+                <h3>old images</h3>
+                    <div class="row">
+                            <div class="col-3 mt-2" *ngFor="let image of images">
+                                <div class="card position-relative">
+                                    <img  class="card-img-top" src='/images/{{image}}' [alt]=image>
                                 </div>
-            <!-- end images upload -->
-                                <!-- start discription -->
-                                <h4>discription :</h4>
-                                 <div class="col-12">
-                                        <!-- <div[innerHtml]='dis'></div> -->
-                                        <div  class="form-group">
-                                            <!-- <angular-editor  name='newdis'[(ngModel)]="newdis" ></angular-editor>  -->
+                            </div>
+                            <h3 *ngIf="imagesURL">new images</h3>
+                            <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-3 img-fluid pr-0 pt-2 pb-1" *ngFor="let image of imagesURL; let name of selectUpload;">
+                                            <figure>
+                                                <img style="width: 100%;" class="img-fluid" id="uplode_image" [src]="image" alt="">	
+                                                <figcaption style="max-width: 300px"></figcaption>
+                                            </figure>
                                         </div>
-                                </div> 
-                                <!-- end discription -->
-                            <!-- </div> -->
-                    <div class="col-12 justify-content-center">
-                        <div class="form-group">
-                            <label for="title">title</label>
-                            <input type="text" autocomplete="false" class="form-control" [(ngModel)]='title' name="title" placeholder="title">
-                        </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group" >
-                                <label for="size_41">quntty for size 41 :</label>
-                                <input type="text" class="form-control" [(ngModel)]='size_41' name="size_41" placeholder="size 41">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group" >
-                                <label for="size_42">quntty for size 42 :</label>
-                                <input type="text" class="form-control" [(ngModel)]='size_42' name="size_42" placeholder="size 42">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group" >
-                                <label for="size_43">quntty for size 43 :</label>
-                                <input type="text" class="form-control" [(ngModel)]='size_43' name="size_43" placeholder="size 43">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="form-group" >
-                              <label for="size_44">quntty for size 44 :</label>
-                              <input type="text" class="form-control" [(ngModel)]='size_44' name="size_44" placeholder="size 44">
-                          </div>
-                      </div>
-                      <div class="col-4">
-                          <div class="form-group" >
-                              <label for="size_45">quntty for size 45 :</label>
-                              <input type="text" class="form-control" [(ngModel)]='size_45' name="size_45" placeholder="size 45">
-                          </div>
-                      </div>
-                      <div class="col-4">
-                          <div class="form-group" >
-                              <label for="size_46">quntty for size 46 :</label>
-                              <input type="text" class="form-control" [(ngModel)]='size_46' name="size_46" placeholder="size 46">
-                          </div>
-                      </div>
-    <!-- start product price -->
-                        <div class="col-6">
+                                    <div class="col-12">
+                                        <div class="form-group position-relative">
+                                                <span class="image_span position-absolute text-center" >select image</span>
+                                            <input id="images" name="images" multiple type="file" (change)='onChange($event.target.files)' /> 
+                                        </div>
+                                    </div>
+                <!-- end images upload -->
+                                    <!-- start discription -->
+                                    <h4>new discription :</h4>
+                                    <div class="col-12">
+                                            <div  class="form-group">
+                                                <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" name='dis' [(ngModel)]="dis" ></app-ngx-editor>
+                                            </div>
+                                    </div> 
+                                    <!-- end discription -->
+                                <!-- </div> -->
+                        <div class="col-12 justify-content-center">
                             <div class="form-group">
-                                <label for="price">price</label>
-                                <input type="text" class="form-control" [(ngModel)]='price' name="price" id="price" placeholder="price">
+                                <label for="title">title</label>
+                                <input type="text" autocomplete="false" class="form-control" [(ngModel)]='title' name="title" placeholder="title">
+                            </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group" >
+                                    <label for="size_41">quntty for size 41 :</label>
+                                    <input type="text" class="form-control" [(ngModel)]='size_41' name="size_41" placeholder="size 41">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group" >
+                                    <label for="size_42">quntty for size 42 :</label>
+                                    <input type="text" class="form-control" [(ngModel)]='size_42' name="size_42" placeholder="size 42">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group" >
+                                    <label for="size_43">quntty for size 43 :</label>
+                                    <input type="text" class="form-control" [(ngModel)]='size_43' name="size_43" placeholder="size 43">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                            <div class="form-group" >
+                                <label for="size_44">quntty for size 44 :</label>
+                                <input type="text" class="form-control" [(ngModel)]='size_44' name="size_44" placeholder="size 44">
                             </div>
                         </div>
-    <!-- end product price -->
-    <!-- start submit button -->
-                        <div class="col-12">
-                            <div class="form-group">
-                                <button class="btn btn-lg" (click)='uploadProduct()'>save</button>
+                        <div class="col-4">
+                            <div class="form-group" >
+                                <label for="size_45">quntty for size 45 :</label>
+                                <input type="text" class="form-control" [(ngModel)]='size_45' name="size_45" placeholder="size 45">
                             </div>
                         </div>
-    <!-- end submit button -->
-                </div>
-                </div>
-                </div>
-            </form>
-        </div>
-    <!-- end  form -->
-      </div>  
-</div>
-</div>
+                        <div class="col-4">
+                            <div class="form-group" >
+                                <label for="size_46">quntty for size 46 :</label>
+                                <input type="text" class="form-control" [(ngModel)]='size_46' name="size_46" placeholder="size 46">
+                            </div>
+                        </div>
+        <!-- start product price -->
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="price">price</label>
+                                    <input type="text" class="form-control" [(ngModel)]='price' name="price" id="price" placeholder="price">
+                                </div>
+                            </div>
+        <!-- end product price -->
+        <!-- start submit button -->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button class="btn btn-lg" (click)='uploadProduct()'>save</button>
+                                </div>
+                            </div>
+        <!-- end submit button -->
+                    </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        <!-- end  form -->
+        </div>  
+    </div>
+    </div>

@@ -19,8 +19,7 @@ export class AdminLoginComponent implements OnInit {
   constructor(
     private _admin: AdminService,
     private _router: Router,
-    private flashMessage: FlashMessagesService,
-    private services:ServicesService
+    private _flashMessages: FlashMessagesService,
   ) {  }
 
   ngOnInit() {
@@ -34,9 +33,9 @@ export class AdminLoginComponent implements OnInit {
     }
     if (this.email == undefined || this.password == undefined) {
       window.scrollTo(0, 0)
-      this.flashMessage.show('plz fill  all fields', {cssClass: 'alert-danger', timeout: 5000});
+      this._flashMessages.show('plz fill  all fields', {cssClass: 'alert-danger', timeout: 5000});
     }else{
-      this._admin.loginAdmin(admin).subscribe((res:any)=> {
+      this._admin.loginAdmin(admin).subscribe((res:any)=> { 
         if(res.success) {
           this._admin.storeAdminData(res.token)
             this._router.navigate(['/admin']);
@@ -45,13 +44,14 @@ export class AdminLoginComponent implements OnInit {
           y.classList.add('animate')
           setTimeout(()=>{
             window.scrollTo(0, 0);
-            this.flashMessage.show(res.errMSG, {cssClass: 'alert-danger', timeout: 5000});
+            this._flashMessages.show(res.errMSG, {cssClass: 'alert-danger', timeout: 5000});
             y.classList.remove('animate')
           }, 1100);
         }
-    },
-      (err)=>{
-        this.flashMessage.show(err.message, {cssClass: 'alert-danger', timeout: 10000});
+      },
+      (error)=>{
+        window.scrollTo(0, 0 );
+        this._flashMessages.show(error.message, {cssClass: 'alert-danger', timeout: 10000});
       });
       }
     }

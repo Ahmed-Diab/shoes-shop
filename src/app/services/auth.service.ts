@@ -11,14 +11,14 @@ export class AuthService {
   _url = this._service.url;
   tu:Boolean = false;
   constructor(
-    private http:HttpClient,
+    private _http:HttpClient,
     private _service:ServicesService
   ) {
     this.isDev = true;  // Change to false before deployment
   }
   
   registerUser(user) {
-    return this.http.post<any>( `${this._url}/users/register`, user).pipe(
+    return this._http.post<any>( `${this._url}/users/register`, user).pipe(
       catchError(this._service.handleError)
     )
   }
@@ -35,7 +35,7 @@ export class AuthService {
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authToken);
-      return this.http.post(`${this._url}/users/login`, user).pipe(
+      return this._http.post(`${this._url}/users/login`, user).pipe(
         catchError(this._service.handleError)
       );
     }
@@ -62,7 +62,7 @@ export class AuthService {
         'Authorization': this.authToken
       })
     };
-    return this.http.get(`${this._url}/users/profile`, httpOptions).pipe(
+    return this._http.get(`${this._url}/users/profile`, httpOptions).pipe(
       catchError(this._service.handleError)
     );
   }

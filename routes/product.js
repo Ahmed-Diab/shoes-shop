@@ -4,7 +4,7 @@ const Shoes = require('../modules/product');
 var multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-var im = require('imagemagick');
+var im = require('imagemagick');// resize images when uplode-
 
 
 // start path to save images & rename images
@@ -38,29 +38,8 @@ const storage = multer.diskStorage({
     }
   } // end check file type 
 // end multer fun
-/////////////////////////////// end handel multer multer /////////////////////////////////
 
-// get all sharts & Tsherts
-router.get('/:id/remove', (req, res, next)=>{
-    Shoes.findByIdAndRemove(req.params.id, (err, product)=>{
-        if (err) {
-            res.json({success:false, errMSG:err.message})
-        }else{
-// to remove product images from src folder
-            for (const i of product.images) {
-                fs.unlink('./public/images/'+i, (err) => {
-                    if (err) throw err;
-                    });
-                fs.unlink('./public/small-images/small_'+i, (err) => {
-                    if (err) throw err;
-                });
-                } // end remove product images from src folder
-            res.json({success:true, data:'removed success'})
-        }
-    })
-}); // end get all sharts & Tsherts
-
-// get all Shoes
+// get product
 router.get('/', (req, res, next)=>{
     Shoes.find({}, (err, Shoes)=>{
         if (err) {
@@ -69,7 +48,7 @@ router.get('/', (req, res, next)=>{
             res.json({success:true, data:Shoes})
         }
     })
-}) //end  get all Shoes
+}) //end get product
 
 
 ///////////////////////////////////////// start post data /////////////////////////////////////
@@ -136,15 +115,35 @@ router.post('/', (req, res, next)=>{
             }
             })
 }) // end post new shose
-///////////////////////////////////////// start post data /////////////////////////////////////
-// start post new shose
+
+// remove product
+router.get('/:id/remove', (req, res, next)=>{
+    Shoes.findByIdAndRemove(req.params.id, (err, product)=>{
+        if (err) {
+            res.json({success:false, errMSG:err.message})
+        }else{
+// to remove product images from src folder
+            for (const i of product.images) {
+                fs.unlink('./public/images/'+i, (err) => {
+                    if (err) throw err;
+                    });
+                fs.unlink('./public/small-images/small_'+i, (err) => {
+                    if (err) throw err;
+                });
+                } // end remove product images from src folder
+            res.json({success:true, data:'removed success'})
+        }
+    })
+}); // end remove
+
+// start edit product
 router.post('/:id/edit', (req, res, next)=>{     
     upload(req, res, (err) => {
         // if req.files
         var category = req.body.category,
         price      = parseInt(req.body.price),
         title      = req.body.title,
-        dis        = req.body.newdis,
+        dis        = req.body.dis,
         size_41    = parseInt(req.body.size_41),
         size_42    = parseInt(req.body.size_42),
         size_43    = parseInt(req.body.size_43);
@@ -202,7 +201,7 @@ router.post('/:id/edit', (req, res, next)=>{
             if (err) {
                 res.json({success:false, errMSG: err.message});
             }else{
-                res.json({success:true, MSG: 'saved'});
+                res.json({success:true, MSG: 'saved and images saved'});
             }
         })// end save new schema to mongose
     }
@@ -225,23 +224,12 @@ router.post('/:id/edit', (req, res, next)=>{
                 res.json({success:true, MSG: 'saved'});
             }
         })// end save new schema to mongose
-    }else{
+    }
+    if (req.files.length > 4 || req.files.length < 4){
         res.json({success:false, errMSG: 'you must select 4 images not more not less'});
     }
     })
-}) // end post new shose
-
-// start to get param by id
-router.param('id', function(req, res, next, id){
-    Shoes.findById(id, function(err, docs){
-        if(err) throw err;
-        else
-        {
-          req.id = docs;
-          next();
-        }
-      });	
-  }) //end  get param by id
+}) // end edit product
 
 
 module.exports = router;
