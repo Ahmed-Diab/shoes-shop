@@ -1,6 +1,6 @@
 # ShoesShop
 
-This project was generated with MEAN stake Angular 6.0.3
+This is a simple e-commres  project it was generated with MEAN stake Angular 6.0.3
 
 you must have install mangodb befor run this app.
 
