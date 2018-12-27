@@ -38,6 +38,8 @@ const editUpload = multer({
   }).single('user_edit_image') // end handel multer
 
 router.post('/login', (req, res, next) => {
+  console.log(req.body);
+  
     const email = req.body.email;
     const password = req.body.password;
     Admin.getAdminByEmail(email, (err, admin) => {
@@ -56,7 +58,7 @@ router.post('/login', (req, res, next) => {
                 const token = jwt.sign({data: admin}, config.secret, {
                     expiresIn: 604800 // 1 week
                   });
-                res.json({success: true, token: 'JWT '+ token,});
+                res.json({success: true, token: 'JWT '+ token});
                 } else {
                     return res.json({success: false, errMSG: 'Wrong password'});
                 }

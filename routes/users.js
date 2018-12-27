@@ -4,13 +4,13 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../modules/users');
-const   multer = require('multer');
+const multer = require('multer');
 const path = require('path');
 
 // start path to save images & rename images
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
-      callback(null, 'public/users-images/')
+      callback(null, 'users-images/')
   },
   filename: function(req, file, cd){
       cd(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));

@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
 var newUser = mongoose.Schema({
     username:{
         type:String,
@@ -33,7 +31,6 @@ var newUser = mongoose.Schema({
 });
 
 const User = module.exports = mongoose.model('User', newUser);
-
 module.exports.getUserById = function(id, callback) {
     User.findById(id, callback);
   }

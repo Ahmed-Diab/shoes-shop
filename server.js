@@ -41,7 +41,7 @@ app.use(session({
 
 
 // Set Static Folder
-app.use(express.static(path.join(__dirname, 'public/')));
+app.use(express.static(path.join(__dirname, 'users-images/')));
 app.use(express.static(path.join(__dirname, 'dist/')));
 
 
